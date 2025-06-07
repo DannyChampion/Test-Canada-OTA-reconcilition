@@ -1,3 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HIUSA BDC Reconciliation Script</title>
+<meta charset="utf-8">
+<style>
+input:disabled+label{color:#ccc;}
+th { text-align: left; }
+td { padding: 3px; }
+tr:nth-child(even) { background: #FFFFDD; }
 
-<!-- saved from url=(0044)https://hi-usa.github.io/bdc-reconciliation/ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="color-scheme" content="light dark"></head><body><div class="line-gutter-backdrop"></div><form autocomplete="off"><label class="line-wrap-control">Line wrap<input type="checkbox" aria-label="Line wrap"></label></form><table><tbody><tr><td class="line-number" value="1"></td><td class="line-content"><span class="html-doctype">&lt;!DOCTYPE html&gt;</span></td></tr><tr><td class="line-number" value="2"></td><td class="line-content"><span class="html-tag">&lt;html&gt;</span></td></tr><tr><td class="line-number" value="3"></td><td class="line-content"><span class="html-tag">&lt;head&gt;</span></td></tr><tr><td class="line-number" value="4"></td><td class="line-content"><span class="html-tag">&lt;title&gt;</span>HIUSA BDC Reconciliation Script<span class="html-tag">&lt;/title&gt;</span></td></tr><tr><td class="line-number" value="5"></td><td class="line-content"><span class="html-tag">&lt;meta <span class="html-attribute-name">charset</span>="<span class="html-attribute-value">utf-8</span>"&gt;</span></td></tr><tr><td class="line-number" value="6"></td><td class="line-content"><span class="html-tag">&lt;style&gt;</span></td></tr><tr><td class="line-number" value="7"></td><td class="line-content">input:disabled+label{color:#ccc;}</td></tr><tr><td class="line-number" value="8"></td><td class="line-content">th { text-align: left; }</td></tr><tr><td class="line-number" value="9"></td><td class="line-content">td { padding: 3px; }</td></tr><tr><td class="line-number" value="10"></td><td class="line-content">tr:nth-child(even) { background: #FFFFDD; }</td></tr><tr><td class="line-number" value="11"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="12"></td><td class="line-content">table#tbl { width: 100%; }</td></tr><tr><td class="line-number" value="13"></td><td class="line-content">table#tbl th:nth-child(8) { overflow-wrap: break-word; max-width: 1px; } /* "Extra Commission" */</td></tr><tr><td class="line-number" value="14"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="15"></td><td class="line-content">tr.merge0 td:nth-child(3) { background-color: #DDDDDD; }</td></tr><tr><td class="line-number" value="16"></td><td class="line-content">tr.merge0 td:nth-child(5) { background-color: #DDDDDD; }</td></tr><tr><td class="line-number" value="17"></td><td class="line-content">tr.merge0 td:nth-child(7) { background-color: #DDDDDD; }</td></tr><tr><td class="line-number" value="18"></td><td class="line-content">tr.merge0 td:nth-child(9) { text-align: right; }</td></tr><tr><td class="line-number" value="19"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="20"></td><td class="line-content">tr.merged { background-color: #DDDDDD; }</td></tr><tr><td class="line-number" value="21"></td><td class="line-content">tr.merged td:nth-child(5) { text-align: right; }</td></tr><tr><td class="line-number" value="22"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="23"></td><td class="line-content">table#tbl td:nth-child(6) { text-align: right; } /* right align dollar amounts */</td></tr><tr><td class="line-number" value="24"></td><td class="line-content">table#tbl td:nth-child(7) { text-align: right; }</td></tr><tr><td class="line-number" value="25"></td><td class="line-content">table#tbl td:nth-child(8) { text-align: right; }</td></tr><tr><td class="line-number" value="26"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="27"></td><td class="line-content">table#tbl td:nth-child(4) { white-space: nowrap; }   /* don't wrap the date fields */</td></tr><tr><td class="line-number" value="28"></td><td class="line-content">table#tbl td:nth-child(5) { white-space: nowrap; }</td></tr><tr><td class="line-number" value="29"></td><td class="line-content">.nobr { white-space: nowrap; } /* set this style for each individual date in fields with multiple date values */</td></tr><tr><td class="line-number" value="30"></td><td class="line-content">table#tbl td:nth-last-child(2) { vertical-align: top; }  /* align multiple values vertically */</td></tr><tr><td class="line-number" value="31"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="32"></td><td class="line-content">span#hotelid_span { display: none; }</td></tr><tr><td class="line-number" value="33"></td><td class="line-content">span#expediarate_span { display: none; }</td></tr><tr><td class="line-number" value="34"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="35"></td><td class="line-content">@media print {</td></tr><tr><td class="line-number" value="36"></td><td class="line-content">    .note { display: none; }</td></tr><tr><td class="line-number" value="37"></td><td class="line-content">    #options { display: none; }</td></tr><tr><td class="line-number" value="38"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="39"></td><td class="line-content"><span class="html-tag">&lt;/style&gt;</span></td></tr><tr><td class="line-number" value="40"></td><td class="line-content"><span class="html-tag">&lt;/head&gt;</span></td></tr><tr><td class="line-number" value="41"></td><td class="line-content"><span class="html-tag">&lt;body&gt;</span></td></tr><tr><td class="line-number" value="42"></td><td class="line-content"><span class="html-tag">&lt;div <span class="html-attribute-name">id</span>="<span class="html-attribute-value">options</span>"&gt;</span></td></tr><tr><td class="line-number" value="43"></td><td class="line-content"><span class="html-tag">&lt;label <span class="html-attribute-name">for</span>="<span class="html-attribute-value">gc-id</span>"&gt;</span>Select your property:<span class="html-tag">&lt;/label&gt;</span></td></tr><tr><td class="line-number" value="44"></td><td class="line-content"><span class="html-tag">&lt;select <span class="html-attribute-name">id</span>="<span class="html-attribute-value">gc-id</span>"&gt;</span></td></tr><tr><td class="line-number" value="45"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">17</span>"&gt;</span>Boston<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="46"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">16</span>"&gt;</span>Chicago<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="47"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">18</span>"&gt;</span>Hyannis<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="48"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">19</span>"&gt;</span>Martha's Vineyard<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="49"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">35</span>"&gt;</span>New Orleans<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="50"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">28</span>"&gt;</span>New York City<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="51"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">6</span>"&gt;</span>Pigeon Point<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="52"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">7</span>"&gt;</span>Pt. Montara<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="53"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">9</span>"&gt;</span>Sacramento<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="54"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">10</span>"&gt;</span>San Diego Downtown<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="55"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">3</span>"&gt;</span>Santa Monica<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="56"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">13</span>" <span class="html-attribute-name">selected</span>&gt;</span>SF Downtown<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="57"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">14</span>"&gt;</span>SF Fisherman's Wharf<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="58"></td><td class="line-content"><span class="html-tag">&lt;option <span class="html-attribute-name">value</span>="<span class="html-attribute-value">22</span>"&gt;</span>Truro<span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="59"></td><td class="line-content"><span class="html-tag">&lt;/option&gt;</span></td></tr><tr><td class="line-number" value="60"></td><td class="line-content"><span class="html-tag">&lt;/select&gt;</span></td></tr><tr><td class="line-number" value="61"></td><td class="line-content"><span class="html-tag">&lt;p&gt;</span></td></tr><tr><td class="line-number" value="62"></td><td class="line-content"><span class="html-tag">&lt;label <span class="html-attribute-name">for</span>="<span class="html-attribute-value">fileBDC</span>"&gt;</span>BDC/EXP file:<span class="html-tag">&lt;/label&gt;</span></td></tr><tr><td class="line-number" value="63"></td><td class="line-content"><span class="html-tag">&lt;input <span class="html-attribute-name">type</span>="<span class="html-attribute-value">file</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">fileBDC</span>"&gt;</span> BDC -&gt; Finance -&gt; <span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/finance_reservations.html" rel="noreferrer noopener">https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/finance_reservations.html</a>"&gt;</span>Reservation statements<span class="html-tag">&lt;/a&gt;</span>, saved in CSV format;</td></tr><tr><td class="line-number" value="64"></td><td class="line-content">or EXP -&gt; Payments -&gt; "<span class="html-tag">&lt;a <span class="html-attribute-name">href</span>="<a class="html-attribute-value html-external-link" target="_blank" href="https://apps.expediapartnercentral.com/lodging/reservations/reconciliations.html" rel="noreferrer noopener">https://apps.expediapartnercentral.com/lodging/reservations/reconciliations.html</a>"&gt;</span>Review reservations(reconciliations)<span class="html-tag">&lt;/a&gt;</span>" -&gt; Export to spreadsheet, then saved as CSV</td></tr><tr><td class="line-number" value="65"></td><td class="line-content"><span class="html-tag">&lt;p&gt;</span></td></tr><tr><td class="line-number" value="66"></td><td class="line-content"><span class="html-tag">&lt;label <span class="html-attribute-name">for</span>="<span class="html-attribute-value">fileGC</span>"&gt;</span>GC file:<span class="html-tag">&lt;/label&gt;</span></td></tr><tr><td class="line-number" value="67"></td><td class="line-content"><span class="html-tag">&lt;input <span class="html-attribute-name">type</span>="<span class="html-attribute-value">file</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">fileGC</span>"&gt;</span> GC Individual Reports -&gt; Management -&gt; OTA Commission; Export to CSV (expand date range for best results)</td></tr><tr><td class="line-number" value="68"></td><td class="line-content"><span class="html-tag">&lt;p&gt;</span></td></tr><tr><td class="line-number" value="69"></td><td class="line-content"><span class="html-tag">&lt;span <span class="html-attribute-name">id</span>="<span class="html-attribute-value">hotelid_span</span>"&gt;</span></td></tr><tr><td class="line-number" value="70"></td><td class="line-content"><span class="html-tag">&lt;label <span class="html-attribute-name">for</span>="<span class="html-attribute-value">hotelid</span>"&gt;</span>Hotel ID:<span class="html-tag">&lt;/label&gt;</span></td></tr><tr><td class="line-number" value="71"></td><td class="line-content"><span class="html-tag">&lt;input <span class="html-attribute-name">type</span>="<span class="html-attribute-value">text</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">hotelid</span>"&gt;</span> (required for Expedia links)</td></tr><tr><td class="line-number" value="72"></td><td class="line-content"><span class="html-tag">&lt;/span&gt;</span></td></tr><tr><td class="line-number" value="73"></td><td class="line-content"><span class="html-tag">&lt;p&gt;</span></td></tr><tr><td class="line-number" value="74"></td><td class="line-content"><span class="html-tag">&lt;span <span class="html-attribute-name">id</span>="<span class="html-attribute-value">expediarate_span</span>"&gt;</span></td></tr><tr><td class="line-number" value="75"></td><td class="line-content"><span class="html-tag">&lt;label <span class="html-attribute-name">for</span>="<span class="html-attribute-value">expediarate</span>"&gt;</span>Expedia Commission Percentage:<span class="html-tag">&lt;/label&gt;</span></td></tr><tr><td class="line-number" value="76"></td><td class="line-content"><span class="html-tag">&lt;input <span class="html-attribute-name">type</span>="<span class="html-attribute-value">text</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">expediarate</span>" <span class="html-attribute-name">size</span>="<span class="html-attribute-value">5</span>"&gt;</span> (default guess is 15%, adjust if your commission is different)</td></tr><tr><td class="line-number" value="77"></td><td class="line-content"><span class="html-tag">&lt;/span&gt;</span></td></tr><tr><td class="line-number" value="78"></td><td class="line-content"><span class="html-tag">&lt;p&gt;</span></td></tr><tr><td class="line-number" value="79"></td><td class="line-content"><span class="html-tag">&lt;button <span class="html-attribute-name">onclick</span>="<span class="html-attribute-value">createTable()</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">reconcile-button</span>" <span class="html-attribute-name">disabled</span>&gt;</span>Reconcile BDC/EXP<span class="html-tag">&lt;/button&gt;</span> <span class="html-tag">&lt;input <span class="html-attribute-name">type</span>="<span class="html-attribute-value">checkbox</span>" <span class="html-attribute-name">id</span>="<span class="html-attribute-value">showall</span>" <span class="html-attribute-name">disabled</span> <span class="html-attribute-name">onclick</span>="<span class="html-attribute-value">createTable()</span>"&gt;</span><span class="html-tag">&lt;label <span class="html-attribute-name">for</span>="<span class="html-attribute-value">showall</span>"<span class="html-attribute-name">"</span>&gt;</span>Show all (non-zero commission) rows<span class="html-tag">&lt;/label&gt;</span></td></tr><tr><td class="line-number" value="80"></td><td class="line-content"><span class="html-tag">&lt;/div&gt;</span></td></tr><tr><td class="line-number" value="81"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="82"></td><td class="line-content"><span class="html-tag">&lt;p <span class="html-attribute-name">id</span>="<span class="html-attribute-value">error</span>"&gt;</span><span class="html-tag">&lt;/p&gt;</span></td></tr><tr><td class="line-number" value="83"></td><td class="line-content"><span class="html-tag">&lt;table <span class="html-attribute-name">id</span>="<span class="html-attribute-value">tbl</span>"&gt;</span><span class="html-tag">&lt;/table&gt;</span></td></tr><tr><td class="line-number" value="84"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="85"></td><td class="line-content"><span class="html-tag">&lt;script&gt;</span></td></tr><tr><td class="line-number" value="86"></td><td class="line-content">"use strict";</td></tr><tr><td class="line-number" value="87"></td><td class="line-content">var bdcArray, gcArray, gcPropertyId = 13;</td></tr><tr><td class="line-number" value="88"></td><td class="line-content">const fileBDC = document.getElementById('fileBDC');</td></tr><tr><td class="line-number" value="89"></td><td class="line-content">const fileGC = document.getElementById('fileGC');</td></tr><tr><td class="line-number" value="90"></td><td class="line-content">const selectPropertyId = document.getElementById('gc-id');</td></tr><tr><td class="line-number" value="91"></td><td class="line-content">fileBDC.addEventListener('change', function() {</td></tr><tr><td class="line-number" value="92"></td><td class="line-content">    const reader = new FileReader();</td></tr><tr><td class="line-number" value="93"></td><td class="line-content">    reader.onload = e =&gt; {</td></tr><tr><td class="line-number" value="94"></td><td class="line-content">        bdcArray = parseCSV(e.target.result);</td></tr><tr><td class="line-number" value="95"></td><td class="line-content">        createTable(false);</td></tr><tr><td class="line-number" value="96"></td><td class="line-content">    };</td></tr><tr><td class="line-number" value="97"></td><td class="line-content">    reader.readAsText(fileBDC.files[0]);</td></tr><tr><td class="line-number" value="98"></td><td class="line-content">});</td></tr><tr><td class="line-number" value="99"></td><td class="line-content">fileGC.addEventListener('change', function() {</td></tr><tr><td class="line-number" value="100"></td><td class="line-content">    const reader = new FileReader();</td></tr><tr><td class="line-number" value="101"></td><td class="line-content">    reader.onload = e =&gt; {</td></tr><tr><td class="line-number" value="102"></td><td class="line-content">        gcArray = parseCSV(e.target.result);</td></tr><tr><td class="line-number" value="103"></td><td class="line-content">        createTable(false);</td></tr><tr><td class="line-number" value="104"></td><td class="line-content">    };</td></tr><tr><td class="line-number" value="105"></td><td class="line-content">    reader.readAsText(fileGC.files[0]);</td></tr><tr><td class="line-number" value="106"></td><td class="line-content">});</td></tr><tr><td class="line-number" value="107"></td><td class="line-content">const hotelid = document.getElementById('hotelid');</td></tr><tr><td class="line-number" value="108"></td><td class="line-content">hotelid.addEventListener('change', function() {</td></tr><tr><td class="line-number" value="109"></td><td class="line-content">    createTable(false);</td></tr><tr><td class="line-number" value="110"></td><td class="line-content">});</td></tr><tr><td class="line-number" value="111"></td><td class="line-content">const expediaIds = {</td></tr><tr><td class="line-number" value="112"></td><td class="line-content">    17: 10057467,</td></tr><tr><td class="line-number" value="113"></td><td class="line-content">    16:  3964916,</td></tr><tr><td class="line-number" value="114"></td><td class="line-content">    18: 10061917,</td></tr><tr><td class="line-number" value="115"></td><td class="line-content">    19: 10061920,</td></tr><tr><td class="line-number" value="116"></td><td class="line-content">    35: 33886361,</td></tr><tr><td class="line-number" value="117"></td><td class="line-content">    28: 10052731,</td></tr><tr><td class="line-number" value="118"></td><td class="line-content">     6: 10052690,</td></tr><tr><td class="line-number" value="119"></td><td class="line-content">     7: 10060403,</td></tr><tr><td class="line-number" value="120"></td><td class="line-content">     9:  6543521,</td></tr><tr><td class="line-number" value="121"></td><td class="line-content">    10:  8422472,</td></tr><tr><td class="line-number" value="122"></td><td class="line-content">     3: 10060273,</td></tr><tr><td class="line-number" value="123"></td><td class="line-content">    13: 38769067,</td></tr><tr><td class="line-number" value="124"></td><td class="line-content">    14: 10057249,</td></tr><tr><td class="line-number" value="125"></td><td class="line-content">    22: 10061930</td></tr><tr><td class="line-number" value="126"></td><td class="line-content">};</td></tr><tr><td class="line-number" value="127"></td><td class="line-content">selectPropertyId.addEventListener('change', function() {</td></tr><tr><td class="line-number" value="128"></td><td class="line-content">    gcPropertyId = selectPropertyId.value;</td></tr><tr><td class="line-number" value="129"></td><td class="line-content">    if (storageAvailable()) {</td></tr><tr><td class="line-number" value="130"></td><td class="line-content">        window.localStorage.setItem('reconciliationPropertyId', gcPropertyId);</td></tr><tr><td class="line-number" value="131"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="132"></td><td class="line-content">    hotelid.value = expediaIds[gcPropertyId];</td></tr><tr><td class="line-number" value="133"></td><td class="line-content">    createTable(false);</td></tr><tr><td class="line-number" value="134"></td><td class="line-content">});</td></tr><tr><td class="line-number" value="135"></td><td class="line-content">const hotelid_span = document.getElementById('hotelid_span');</td></tr><tr><td class="line-number" value="136"></td><td class="line-content">const expediarate = document.getElementById('expediarate');</td></tr><tr><td class="line-number" value="137"></td><td class="line-content">expediarate.addEventListener('change', function() {</td></tr><tr><td class="line-number" value="138"></td><td class="line-content">    createTable(false);</td></tr><tr><td class="line-number" value="139"></td><td class="line-content">});</td></tr><tr><td class="line-number" value="140"></td><td class="line-content">const expediarate_span = document.getElementById('expediarate_span');</td></tr><tr><td class="line-number" value="141"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="142"></td><td class="line-content">if (storageAvailable()) {</td></tr><tr><td class="line-number" value="143"></td><td class="line-content">    const pId = window.localStorage.getItem('reconciliationPropertyId');</td></tr><tr><td class="line-number" value="144"></td><td class="line-content">    if (pId) {</td></tr><tr><td class="line-number" value="145"></td><td class="line-content">        selectPropertyId.value = gcPropertyId = pId;</td></tr><tr><td class="line-number" value="146"></td><td class="line-content">        hotelid.value = expediaIds[pId];</td></tr><tr><td class="line-number" value="147"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="148"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="149"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="150"></td><td class="line-content">let totalComm;</td></tr><tr><td class="line-number" value="151"></td><td class="line-content">let reportType;</td></tr><tr><td class="line-number" value="152"></td><td class="line-content">function createTable(showErrors = true) {</td></tr><tr><td class="line-number" value="153"></td><td class="line-content">    totalComm = 0;</td></tr><tr><td class="line-number" value="154"></td><td class="line-content">    reportType = 'BDC';</td></tr><tr><td class="line-number" value="155"></td><td class="line-content">    if (bdcArray === undefined) return;</td></tr><tr><td class="line-number" value="156"></td><td class="line-content">    let minCols, jAmt;</td></tr><tr><td class="line-number" value="157"></td><td class="line-content">    let jArr, jDep, jName, jPct, jPID, jComm;</td></tr><tr><td class="line-number" value="158"></td><td class="line-content">    let kPct = 15;</td></tr><tr><td class="line-number" value="159"></td><td class="line-content">    if (bdcArray[0][0] === 'Reservation number') {</td></tr><tr><td class="line-number" value="160"></td><td class="line-content">        // columns (monthly invoice):</td></tr><tr><td class="line-number" value="161"></td><td class="line-content">        // 0: BDC number</td></tr><tr><td class="line-number" value="162"></td><td class="line-content">        // 3: arrival date</td></tr><tr><td class="line-number" value="163"></td><td class="line-content">        // 4: departure date</td></tr><tr><td class="line-number" value="164"></td><td class="line-content">        // 6: guest name</td></tr><tr><td class="line-number" value="165"></td><td class="line-content">        // 9: nights</td></tr><tr><td class="line-number" value="166"></td><td class="line-content">        // 10: commission percentage</td></tr><tr><td class="line-number" value="167"></td><td class="line-content">        // 12: final amount</td></tr><tr><td class="line-number" value="168"></td><td class="line-content">        // 13: commission amount (not actually needed for the monthly)</td></tr><tr><td class="line-number" value="169"></td><td class="line-content">        // 17: property ID</td></tr><tr><td class="line-number" value="170"></td><td class="line-content">        minCols = 19;</td></tr><tr><td class="line-number" value="171"></td><td class="line-content">        jAmt = 12;</td></tr><tr><td class="line-number" value="172"></td><td class="line-content">    	jName = 6;</td></tr><tr><td class="line-number" value="173"></td><td class="line-content">    	jPct = 10;</td></tr><tr><td class="line-number" value="174"></td><td class="line-content">    	jComm = 13;</td></tr><tr><td class="line-number" value="175"></td><td class="line-content">    	jPID = 17;</td></tr><tr><td class="line-number" value="176"></td><td class="line-content">    	jArr = 3;</td></tr><tr><td class="line-number" value="177"></td><td class="line-content">    	jDep = 4;</td></tr><tr><td class="line-number" value="178"></td><td class="line-content">    } else if (bdcArray[0][0] === 'Book number') {</td></tr><tr><td class="line-number" value="179"></td><td class="line-content">        // columns (exported from "Reservations")</td></tr><tr><td class="line-number" value="180"></td><td class="line-content">        //  0: BDC-*</td></tr><tr><td class="line-number" value="181"></td><td class="line-content">        //  2: name</td></tr><tr><td class="line-number" value="182"></td><td class="line-content">        //  3: arrival</td></tr><tr><td class="line-number" value="183"></td><td class="line-content">        //  4: departure</td></tr><tr><td class="line-number" value="184"></td><td class="line-content">        // 12: price</td></tr><tr><td class="line-number" value="185"></td><td class="line-content">        // 13: commission percentage</td></tr><tr><td class="line-number" value="186"></td><td class="line-content">        // 14: commission ammount</td></tr><tr><td class="line-number" value="187"></td><td class="line-content">        // NO Property ID in this one!</td></tr><tr><td class="line-number" value="188"></td><td class="line-content">        minCols = 15;</td></tr><tr><td class="line-number" value="189"></td><td class="line-content">        jAmt = 12;</td></tr><tr><td class="line-number" value="190"></td><td class="line-content">    	jName = 2;</td></tr><tr><td class="line-number" value="191"></td><td class="line-content">    	jPct = 13;</td></tr><tr><td class="line-number" value="192"></td><td class="line-content">    	jComm = 14;</td></tr><tr><td class="line-number" value="193"></td><td class="line-content">    	jArr = 3;</td></tr><tr><td class="line-number" value="194"></td><td class="line-content">    	jDep = 4;</td></tr><tr><td class="line-number" value="195"></td><td class="line-content">    } else if (bdcArray[0][0] === 'Reservation ID') {</td></tr><tr><td class="line-number" value="196"></td><td class="line-content">    	// Expedia reconciliation format</td></tr><tr><td class="line-number" value="197"></td><td class="line-content">    	// 0: res id</td></tr><tr><td class="line-number" value="198"></td><td class="line-content">    	// 1: check-in</td></tr><tr><td class="line-number" value="199"></td><td class="line-content">    	// 2: check-out</td></tr><tr><td class="line-number" value="200"></td><td class="line-content">    	// 3: guest name</td></tr><tr><td class="line-number" value="201"></td><td class="line-content">    	// 5: reservation amount, including taxes, which might be wrong</td></tr><tr><td class="line-number" value="202"></td><td class="line-content">    	// 6: commission amount</td></tr><tr><td class="line-number" value="203"></td><td class="line-content">    	// 7: reconciled amount</td></tr><tr><td class="line-number" value="204"></td><td class="line-content">    	reportType = 'EXP';</td></tr><tr><td class="line-number" value="205"></td><td class="line-content">        minCols = 7;</td></tr><tr><td class="line-number" value="206"></td><td class="line-content">    	jArr = 1;</td></tr><tr><td class="line-number" value="207"></td><td class="line-content">    	jDep = 2;</td></tr><tr><td class="line-number" value="208"></td><td class="line-content">    	jName = 3;</td></tr><tr><td class="line-number" value="209"></td><td class="line-content">    	jComm = 6;</td></tr><tr><td class="line-number" value="210"></td><td class="line-content">    	jAmt = 8; // we will calculate this later based on the commission</td></tr><tr><td class="line-number" value="211"></td><td class="line-content">        expediarate.value = expediarate.value.replace(/\D/g, ''); // only digits allowed</td></tr><tr><td class="line-number" value="212"></td><td class="line-content">        kPct = parseInt(expediarate.value) || 15;</td></tr><tr><td class="line-number" value="213"></td><td class="line-content">        if (kPct &lt; 15) kPct = 15;</td></tr><tr><td class="line-number" value="214"></td><td class="line-content">        else if (kPct &gt; 40) kPct = 40; // surely commission will never exceed 40%, right?</td></tr><tr><td class="line-number" value="215"></td><td class="line-content">        expediarate.value = kPct;</td></tr><tr><td class="line-number" value="216"></td><td class="line-content">    } else {</td></tr><tr><td class="line-number" value="217"></td><td class="line-content">    	// we don't recognize this format. Skip every row.</td></tr><tr><td class="line-number" value="218"></td><td class="line-content">    	minCols = 10000;</td></tr><tr><td class="line-number" value="219"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="220"></td><td class="line-content">    hotelid_span.style.display = reportType === 'EXP' ? 'inline' : 'none';</td></tr><tr><td class="line-number" value="221"></td><td class="line-content">    expediarate_span.style.display = reportType === 'EXP' ? 'inline' : 'none';</td></tr><tr><td class="line-number" value="222"></td><td class="line-content">    hotelid.value = hotelid.value.replace(/\D/g, ''); // only digits allowed in hotel id</td></tr><tr><td class="line-number" value="223"></td><td class="line-content">    if (hotelid.value === '') hotelid.value = '38769067';</td></tr><tr><td class="line-number" value="224"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="225"></td><td class="line-content">    if (gcArray === undefined) return;</td></tr><tr><td class="line-number" value="226"></td><td class="line-content">    const button = document.getElementById('reconcile-button'); // if both arrays are defined, we can enable the button</td></tr><tr><td class="line-number" value="227"></td><td class="line-content">    button.disabled = false;</td></tr><tr><td class="line-number" value="228"></td><td class="line-content">    const checkbox = document.getElementById('showall');</td></tr><tr><td class="line-number" value="229"></td><td class="line-content">    checkbox.disabled = false;</td></tr><tr><td class="line-number" value="230"></td><td class="line-content">    let showAllRows = checkbox.checked;</td></tr><tr><td class="line-number" value="231"></td><td class="line-content">    const errorElem = document.getElementById('error');</td></tr><tr><td class="line-number" value="232"></td><td class="line-content">    errorElem.innerHTML = '';</td></tr><tr><td class="line-number" value="233"></td><td class="line-content">    </td></tr><tr><td class="line-number" value="234"></td><td class="line-content">    // collect folio data from the GC export</td></tr><tr><td class="line-number" value="235"></td><td class="line-content">    const gcData = {}; // BDC# =&gt; array of info</td></tr><tr><td class="line-number" value="236"></td><td class="line-content">    //const seenBDC = {};</td></tr><tr><td class="line-number" value="237"></td><td class="line-content">    for (const row of gcArray) {</td></tr><tr><td class="line-number" value="238"></td><td class="line-content">        if (row.length &lt; 19) continue;</td></tr><tr><td class="line-number" value="239"></td><td class="line-content">        // columns:</td></tr><tr><td class="line-number" value="240"></td><td class="line-content">        //  0: BDC-*</td></tr><tr><td class="line-number" value="241"></td><td class="line-content">        //  3: name</td></tr><tr><td class="line-number" value="242"></td><td class="line-content">        //  7: arrival</td></tr><tr><td class="line-number" value="243"></td><td class="line-content">        // 11: departure</td></tr><tr><td class="line-number" value="244"></td><td class="line-content">        // 12: final amt</td></tr><tr><td class="line-number" value="245"></td><td class="line-content">        // 16: folio status</td></tr><tr><td class="line-number" value="246"></td><td class="line-content">        // 18: folio ID</td></tr><tr><td class="line-number" value="247"></td><td class="line-content">        if (!/^(BDC|EXP)-/.test(row[0])) continue;</td></tr><tr><td class="line-number" value="248"></td><td class="line-content">        const m = row[0].match(/\d+/); // extract the first group of digits. Don't rely on this GC column to be well-formed/unedited</td></tr><tr><td class="line-number" value="249"></td><td class="line-content">        if (m === null) continue;</td></tr><tr><td class="line-number" value="250"></td><td class="line-content">        const id = m[0];</td></tr><tr><td class="line-number" value="251"></td><td class="line-content">        if (!/^[0-9]{6,}$/.test(id)) continue; // column 0 should be BDC number, ten+ digits; or EXP number 6+ digits</td></tr><tr><td class="line-number" value="252"></td><td class="line-content">        const amt = parseFloat(row[12].replace(/^\$/, '')); // strip dollar sign, then convert to number</td></tr><tr><td class="line-number" value="253"></td><td class="line-content">        const folioID = row[18];</td></tr><tr><td class="line-number" value="254"></td><td class="line-content">        const status = row[16];</td></tr><tr><td class="line-number" value="255"></td><td class="line-content">        if (id in gcData) {</td></tr><tr><td class="line-number" value="256"></td><td class="line-content">            // for minigroups, sum up the total, and keep a list of the folio ID's and statuses</td></tr><tr><td class="line-number" value="257"></td><td class="line-content">            const h = gcData[id];</td></tr><tr><td class="line-number" value="258"></td><td class="line-content">            h[0] += amt;</td></tr><tr><td class="line-number" value="259"></td><td class="line-content">            h[1].push(folioID);</td></tr><tr><td class="line-number" value="260"></td><td class="line-content">            h[2].push(status);</td></tr><tr><td class="line-number" value="261"></td><td class="line-content">            // usually the arrival/departure dates should be the same, but store these as a set just in case</td></tr><tr><td class="line-number" value="262"></td><td class="line-content">            h[3].add(row[7]);</td></tr><tr><td class="line-number" value="263"></td><td class="line-content">            h[4].add(row[11]);</td></tr><tr><td class="line-number" value="264"></td><td class="line-content">        } else {</td></tr><tr><td class="line-number" value="265"></td><td class="line-content">            gcData[id] = [amt, [folioID], [status], new Set([row[7]]), new Set([row[11]])];</td></tr><tr><td class="line-number" value="266"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="267"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="268"></td><td class="line-content">    if (Object.keys(gcData).length === 0) {</td></tr><tr><td class="line-number" value="269"></td><td class="line-content">        if (showErrors) {</td></tr><tr><td class="line-number" value="270"></td><td class="line-content">            errorElem.innerHTML = 'No usable data found in the GC file. Make sure you selected the right file ("OTA Commission (HI USA).csv" by default).';</td></tr><tr><td class="line-number" value="271"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="272"></td><td class="line-content">        return;</td></tr><tr><td class="line-number" value="273"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="274"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="275"></td><td class="line-content">    // BDC first pass: store all rows where the GC total is less than the BDC total</td></tr><tr><td class="line-number" value="276"></td><td class="line-content">    const stayedMaybeMerged = [];</td></tr><tr><td class="line-number" value="277"></td><td class="line-content">    const canceledMaybeMerged = {}; // hash of possible merged reservations, identified by (lowercased) BDC guest name</td></tr><tr><td class="line-number" value="278"></td><td class="line-content">    const results = [];</td></tr><tr><td class="line-number" value="279"></td><td class="line-content">    for (let i = 1, row; row = bdcArray[i]; ++i) {</td></tr><tr><td class="line-number" value="280"></td><td class="line-content">        if (row.length &lt; minCols) continue;</td></tr><tr><td class="line-number" value="281"></td><td class="line-content">        if (!/^[0-9]{6,}$/.test(row[0])) continue; // column 0 should be BDC number, ten+ digits; or EXP number 6+ digits</td></tr><tr><td class="line-number" value="282"></td><td class="line-content">        //seenBDC[row[0]] = true;</td></tr><tr><td class="line-number" value="283"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="284"></td><td class="line-content">        let amt, commission;</td></tr><tr><td class="line-number" value="285"></td><td class="line-content">        if (reportType === 'BDC') {</td></tr><tr><td class="line-number" value="286"></td><td class="line-content">            amt = parseFloat(row[jAmt]);</td></tr><tr><td class="line-number" value="287"></td><td class="line-content">            commission = parseFloat(row[jComm]); // for the Reservations exports, there's no "final amount" field ("amt" is the price field), but the commission amount field will be blank if the guest canceled and the fee was waived</td></tr><tr><td class="line-number" value="288"></td><td class="line-content">        } else {</td></tr><tr><td class="line-number" value="289"></td><td class="line-content">            const reconciled = parseFloat(row[jComm+1]);</td></tr><tr><td class="line-number" value="290"></td><td class="line-content">            if (Number.isNaN(reconciled)) {</td></tr><tr><td class="line-number" value="291"></td><td class="line-content">               // for Expedia, calculate the stay amount from the commission</td></tr><tr><td class="line-number" value="292"></td><td class="line-content">                commission = parseFloat(row[jComm]);</td></tr><tr><td class="line-number" value="293"></td><td class="line-content">                amt = Math.round(commission*10000/kPct)/100;</td></tr><tr><td class="line-number" value="294"></td><td class="line-content">            } else {</td></tr><tr><td class="line-number" value="295"></td><td class="line-content">                // but if there's already a reconciled amount in the report, use that instead</td></tr><tr><td class="line-number" value="296"></td><td class="line-content">                // btw this amount appears to be post-tax for stays, and pre-tax for cancellations</td></tr><tr><td class="line-number" value="297"></td><td class="line-content">                // it doesn't matter too much for our purposes</td></tr><tr><td class="line-number" value="298"></td><td class="line-content">                // because we'll usually be downloading the report from expedia *before* reconciliation is done</td></tr><tr><td class="line-number" value="299"></td><td class="line-content">                amt = reconciled;</td></tr><tr><td class="line-number" value="300"></td><td class="line-content">                commission = reconciled*kPct/100;</td></tr><tr><td class="line-number" value="301"></td><td class="line-content">            }</td></tr><tr><td class="line-number" value="302"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="303"></td><td class="line-content">        if (amt == 0) continue; // skip if BDC doesn't think we owe commission</td></tr><tr><td class="line-number" value="304"></td><td class="line-content">        if (!commission) continue;</td></tr><tr><td class="line-number" value="305"></td><td class="line-content">        if (row[jName] === '') {</td></tr><tr><td class="line-number" value="306"></td><td class="line-content">            row[jName] = row[jName-1]; // if "guest name" is empty, fall back to "booker name"</td></tr><tr><td class="line-number" value="307"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="308"></td><td class="line-content">        row[jAmt] = amt;</td></tr><tr><td class="line-number" value="309"></td><td class="line-content">        row.push(i+1); // save the line number from BDC file</td></tr><tr><td class="line-number" value="310"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="311"></td><td class="line-content">        const id = row[0];</td></tr><tr><td class="line-number" value="312"></td><td class="line-content">        if (id in gcData &amp;&amp; !showAllRows) {</td></tr><tr><td class="line-number" value="313"></td><td class="line-content">            const gcAmt = parseFloat(gcData[id][0]);</td></tr><tr><td class="line-number" value="314"></td><td class="line-content">            if (Math.abs(amt - gcAmt) &lt; 0.42) continue; // skip if guest paid the same (or more, see below) than what BDC statement says</td></tr><tr><td class="line-number" value="315"></td><td class="line-content">                // can't use === here because floating point comparisons with minigroup totals could fail</td></tr><tr><td class="line-number" value="316"></td><td class="line-content">                // 2024-12-01: but actually just skip small discrepancies because it's not worth the time to save $0.07 on commission</td></tr><tr><td class="line-number" value="317"></td><td class="line-content">            if (gcAmt === 0) {</td></tr><tr><td class="line-number" value="318"></td><td class="line-content">                // this folio was canceled, so save it in case it was merged</td></tr><tr><td class="line-number" value="319"></td><td class="line-content">                const ident = row[jName].toLowerCase();</td></tr><tr><td class="line-number" value="320"></td><td class="line-content">                if (ident in canceledMaybeMerged) {</td></tr><tr><td class="line-number" value="321"></td><td class="line-content">                    canceledMaybeMerged[ident].push(row);</td></tr><tr><td class="line-number" value="322"></td><td class="line-content">                } else {</td></tr><tr><td class="line-number" value="323"></td><td class="line-content">                    canceledMaybeMerged[ident] = [row];</td></tr><tr><td class="line-number" value="324"></td><td class="line-content">                }</td></tr><tr><td class="line-number" value="325"></td><td class="line-content">            } else if (amt &lt; gcAmt) {   // but if it's more, save it in case it was merged with another folio</td></tr><tr><td class="line-number" value="326"></td><td class="line-content">                stayedMaybeMerged.push(row);</td></tr><tr><td class="line-number" value="327"></td><td class="line-content">                continue;</td></tr><tr><td class="line-number" value="328"></td><td class="line-content">            }</td></tr><tr><td class="line-number" value="329"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="330"></td><td class="line-content">        results.push(row);</td></tr><tr><td class="line-number" value="331"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="332"></td><td class="line-content">    if (results.length === 0) {</td></tr><tr><td class="line-number" value="333"></td><td class="line-content">        if (showErrors) {</td></tr><tr><td class="line-number" value="334"></td><td class="line-content">            errorElem.innerHTML = 'No results found in the BDC file.';</td></tr><tr><td class="line-number" value="335"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="336"></td><td class="line-content">        return;</td></tr><tr><td class="line-number" value="337"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="338"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="339"></td><td class="line-content">    // merged folio handling</td></tr><tr><td class="line-number" value="340"></td><td class="line-content">    // Go through list reservations where GC amount is greater than BDC amount. The GC amount might include reservations that were merged.</td></tr><tr><td class="line-number" value="341"></td><td class="line-content">    // We look for reservations where the name is the same and the dates stayed overlap with the GC dates stayed.</td></tr><tr><td class="line-number" value="342"></td><td class="line-content">    // (I don't consider these critera quite unique enough to guarantee that the result will be 100% accurate, so we output these for human review)</td></tr><tr><td class="line-number" value="343"></td><td class="line-content">    const bdcMerges = {}; // BDC id =&gt; list of rows</td></tr><tr><td class="line-number" value="344"></td><td class="line-content">    const rowsToRemove = new Set();</td></tr><tr><td class="line-number" value="345"></td><td class="line-content">    for (const row of stayedMaybeMerged) {</td></tr><tr><td class="line-number" value="346"></td><td class="line-content">        const ident = row[jName].toLowerCase();</td></tr><tr><td class="line-number" value="347"></td><td class="line-content">        if (!(ident in canceledMaybeMerged)) continue;</td></tr><tr><td class="line-number" value="348"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="349"></td><td class="line-content">        // add row back to results if there are canceled folios with the same name AND overlapping stay date</td></tr><tr><td class="line-number" value="350"></td><td class="line-content">        const id = row[0];</td></tr><tr><td class="line-number" value="351"></td><td class="line-content">        const arr = Array.from(gcData[id][3]).sort()[0]; // arrival date, according to GC (technically, the earliest arrival date if the BDC id corresponds to a GC minigroup)</td></tr><tr><td class="line-number" value="352"></td><td class="line-content">        const dep = Array.from(gcData[id][4]).sort().at(-1); // GC departure date (technically, the latest departure date if there's a minigroup)</td></tr><tr><td class="line-number" value="353"></td><td class="line-content">        let showRow = false;</td></tr><tr><td class="line-number" value="354"></td><td class="line-content">        for (const r of canceledMaybeMerged[ident]) {</td></tr><tr><td class="line-number" value="355"></td><td class="line-content">            if (r[3] &lt; dep &amp;&amp; r[4] &gt; arr) {</td></tr><tr><td class="line-number" value="356"></td><td class="line-content">                showRow = true;</td></tr><tr><td class="line-number" value="357"></td><td class="line-content">                if (id in bdcMerges) {</td></tr><tr><td class="line-number" value="358"></td><td class="line-content">                    bdcMerges[id].push(r);</td></tr><tr><td class="line-number" value="359"></td><td class="line-content">                } else {</td></tr><tr><td class="line-number" value="360"></td><td class="line-content">                    bdcMerges[id] = [r];</td></tr><tr><td class="line-number" value="361"></td><td class="line-content">                }</td></tr><tr><td class="line-number" value="362"></td><td class="line-content">                rowsToRemove.add(r[0]);</td></tr><tr><td class="line-number" value="363"></td><td class="line-content">            }</td></tr><tr><td class="line-number" value="364"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="365"></td><td class="line-content">        // insert this extra row in the right place (row number is stored in last item of the "row" array). The "results" array is already ordered by row number</td></tr><tr><td class="line-number" value="366"></td><td class="line-content">        if (showRow) binaryInsert(results, row, (a,b) =&gt; a[a.length-1] - b[b.length-1]);</td></tr><tr><td class="line-number" value="367"></td><td class="line-content">        // for a small number of inserts, probably more efficient to binary insert into the already-sorted array, so I switched to doing that instead of pushing, then sorting</td></tr><tr><td class="line-number" value="368"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="369"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="370"></td><td class="line-content">    // second pass: output table, inserting possible merged folios</td></tr><tr><td class="line-number" value="371"></td><td class="line-content">    const today = Date.now();</td></tr><tr><td class="line-number" value="372"></td><td class="line-content">    const endOfLastMonth = new Date(); endOfLastMonth.setDate(0);</td></tr><tr><td class="line-number" value="373"></td><td class="line-content">    const bdcPropertyId = gcPropertyId == 13 ? 347594 : 270216; // 270216 is NY's BDC id</td></tr><tr><td class="line-number" value="374"></td><td class="line-content">    let content = tableHeader(reportType);</td></tr><tr><td class="line-number" value="375"></td><td class="line-content">    for (const row of results) {</td></tr><tr><td class="line-number" value="376"></td><td class="line-content">        const id = row[0];</td></tr><tr><td class="line-number" value="377"></td><td class="line-content">        if (rowsToRemove.has(id)) continue;</td></tr><tr><td class="line-number" value="378"></td><td class="line-content">        const name = row[jName];</td></tr><tr><td class="line-number" value="379"></td><td class="line-content">        const amt = row[jAmt];</td></tr><tr><td class="line-number" value="380"></td><td class="line-content">        let arr = '';</td></tr><tr><td class="line-number" value="381"></td><td class="line-content">        let dep = '';</td></tr><tr><td class="line-number" value="382"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="383"></td><td class="line-content">        let gcAmt;</td></tr><tr><td class="line-number" value="384"></td><td class="line-content">        let folios;</td></tr><tr><td class="line-number" value="385"></td><td class="line-content">        let statuses = [];</td></tr><tr><td class="line-number" value="386"></td><td class="line-content">        let gcArr = [];</td></tr><tr><td class="line-number" value="387"></td><td class="line-content">        let gcDep = [];</td></tr><tr><td class="line-number" value="388"></td><td class="line-content">        if (id in gcData) {</td></tr><tr><td class="line-number" value="389"></td><td class="line-content">            gcAmt = gcData[id][0];</td></tr><tr><td class="line-number" value="390"></td><td class="line-content">            folios = gcData[id][1];</td></tr><tr><td class="line-number" value="391"></td><td class="line-content">            statuses = gcData[id][2];</td></tr><tr><td class="line-number" value="392"></td><td class="line-content">            gcArr = gcData[id][3];</td></tr><tr><td class="line-number" value="393"></td><td class="line-content">            gcDep = gcData[id][4];</td></tr><tr><td class="line-number" value="394"></td><td class="line-content">        } else {</td></tr><tr><td class="line-number" value="395"></td><td class="line-content">            // the expedia report includes unreconciled reservations from this month, so skip these</td></tr><tr><td class="line-number" value="396"></td><td class="line-content">            if (Date.parse(row[jArr]) &gt; endOfLastMonth) continue;</td></tr><tr><td class="line-number" value="397"></td><td class="line-content">            if (Date.parse(row[jDep]) &gt; today) continue;</td></tr><tr><td class="line-number" value="398"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="399"></td><td class="line-content">        const isMerge = id in bdcMerges;</td></tr><tr><td class="line-number" value="400"></td><td class="line-content">        if (showAllRows || isMerge || !(id in gcData) || statuses.includes("Stayed")) {</td></tr><tr><td class="line-number" value="401"></td><td class="line-content">            arr = row[jArr];</td></tr><tr><td class="line-number" value="402"></td><td class="line-content">            dep = row[jDep];</td></tr><tr><td class="line-number" value="403"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="404"></td><td class="line-content">        let mergeTotal, nRows;</td></tr><tr><td class="line-number" value="405"></td><td class="line-content">        if (isMerge) {</td></tr><tr><td class="line-number" value="406"></td><td class="line-content">            mergeTotal = bdcMerges[id].reduce((subtotal, row) =&gt; subtotal + row[jAmt], amt);</td></tr><tr><td class="line-number" value="407"></td><td class="line-content">            nRows = bdcMerges[id].length + 1;</td></tr><tr><td class="line-number" value="408"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="409"></td><td class="line-content">        const propertyID = jPID ? row[jPID] : reportType === 'BDC' ? bdcPropertyId : hotelid.value;</td></tr><tr><td class="line-number" value="410"></td><td class="line-content">        content += tableRow(reportType, row.at(-1), id, propertyID, name, arr, dep, amt, jPct ? row[jPct] : kPct, gcAmt, gcArr, gcDep, folios, statuses, isMerge, mergeTotal, nRows);</td></tr><tr><td class="line-number" value="411"></td><td class="line-content">        if (isMerge) {</td></tr><tr><td class="line-number" value="412"></td><td class="line-content">            for (const row of bdcMerges[id].sort((a,b)=&gt;a[jArr].localeCompare(b[jArr]))) {</td></tr><tr><td class="line-number" value="413"></td><td class="line-content">                const id = row[0];</td></tr><tr><td class="line-number" value="414"></td><td class="line-content">                content += tableRow(reportType, row.at(-1), id, propertyID, '"', row[jArr], row[jDep], row[jAmt], jPct ? row[jPct] : kPct,</td></tr><tr><td class="line-number" value="415"></td><td class="line-content">                                    gcData[id][0], gcData[id][3], gcData[id][4], gcData[id][1], gcData[id][2]);</td></tr><tr><td class="line-number" value="416"></td><td class="line-content">            }</td></tr><tr><td class="line-number" value="417"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="418"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="419"></td><td class="line-content">    content += '&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan="2"&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;'</td></tr><tr><td class="line-number" value="420"></td><td class="line-content">            + "&lt;td&gt;&lt;b&gt;$" + (totalComm/100).toFixed(2) + "&lt;/b&gt;&lt;/td&gt;"</td></tr><tr><td class="line-number" value="421"></td><td class="line-content">            + '&lt;td colspan="4"&gt;' + (showAllRows ? "total in extra commissions (ignoring merged folios)" : "You could save at least this much in commissions!") + '&lt;/td&gt;'</td></tr><tr><td class="line-number" value="422"></td><td class="line-content">            + "&lt;/tr&gt;";</td></tr><tr><td class="line-number" value="423"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="424"></td><td class="line-content">    // Possible early checkouts: GC folios with no corresponding line in the BDC file</td></tr><tr><td class="line-number" value="425"></td><td class="line-content">    // disable this for now, these should show up in the BDC report for the following month</td></tr><tr><td class="line-number" value="426"></td><td class="line-content">//     const currentMonth = results[0][4].match(/(-)(\d\d)/)[2];</td></tr><tr><td class="line-number" value="427"></td><td class="line-content">//     const hotelId = jPID ? results[0][jPID] : 270216;</td></tr><tr><td class="line-number" value="428"></td><td class="line-content">//     for (const [id, row] of Object.entries(gcData)) {</td></tr><tr><td class="line-number" value="429"></td><td class="line-content">//         if (seenBDC[id]) continue;</td></tr><tr><td class="line-number" value="430"></td><td class="line-content">//         const arrMonth = Array.from(row[3])[0].match(/(-)(\d\d)/)[2];</td></tr><tr><td class="line-number" value="431"></td><td class="line-content">//         if (arrMonth !== currentMonth) continue;</td></tr><tr><td class="line-number" value="432"></td><td class="line-content">//         const depMonth = Array.from(row[4])[0].match(/(-)(\d\d)/)[2];</td></tr><tr><td class="line-number" value="433"></td><td class="line-content">//         if (arrMonth !== depMonth) continue;</td></tr><tr><td class="line-number" value="434"></td><td class="line-content">//         content += tableRow(reportType, '', id, hotelId, 'Not in the BDC report.', '', '', '', '',</td></tr><tr><td class="line-number" value="435"></td><td class="line-content">//                                 parseFloat(row[0]), row[3], row[4], row[1], row[2]);</td></tr><tr><td class="line-number" value="436"></td><td class="line-content">//     }</td></tr><tr><td class="line-number" value="437"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="438"></td><td class="line-content">    document.getElementById("tbl").innerHTML = content;</td></tr><tr><td class="line-number" value="439"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="440"></td><td class="line-content">function tableRow(ota, line, id, hotel_id, name, arr, dep, amt, pct, gcAmt, gcArr, gcDep, folios, statuses, isMerge, mergeTotal, nRows) {</td></tr><tr><td class="line-number" value="441"></td><td class="line-content">    const mergeSupport = name === '"';</td></tr><tr><td class="line-number" value="442"></td><td class="line-content">    let comm = '';</td></tr><tr><td class="line-number" value="443"></td><td class="line-content">    amt = parseFloat(amt); // among other reasons, the "Reservations" export has this column as "xyz USD"</td></tr><tr><td class="line-number" value="444"></td><td class="line-content">    const cmpAmt = isMerge ? mergeTotal : amt;</td></tr><tr><td class="line-number" value="445"></td><td class="line-content">    if (gcAmt !== undefined &amp;&amp; !mergeSupport &amp;&amp; (cmpAmt - gcAmt) &gt; 0.01) {</td></tr><tr><td class="line-number" value="446"></td><td class="line-content">        comm = ((cmpAmt - gcAmt)*pct/100);</td></tr><tr><td class="line-number" value="447"></td><td class="line-content">        totalComm += Math.round(comm*100); // add up in cents, as integer</td></tr><tr><td class="line-number" value="448"></td><td class="line-content">        comm = comm.toFixed(2);</td></tr><tr><td class="line-number" value="449"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="450"></td><td class="line-content">    name = name.replace("\n", "&lt;br&gt;");</td></tr><tr><td class="line-number" value="451"></td><td class="line-content">    let result = "&lt;tr" + (isMerge? ' class="merge0"' : mergeSupport ? ' class="merged"' : '') + "&gt;"</td></tr><tr><td class="line-number" value="452"></td><td class="line-content">               + "&lt;td&gt;" + line + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="453"></td><td class="line-content">               + '&lt;td&gt;&lt;a href="' + propertyLink(id, reportType, hotel_id) + '" target="bdc-context"&gt;'</td></tr><tr><td class="line-number" value="454"></td><td class="line-content">                        + id + '&lt;/a&gt;&lt;/td&gt;'</td></tr><tr><td class="line-number" value="455"></td><td class="line-content">               + (isMerge ? `&lt;td rowspan="${nRows}"&gt;${name}&lt;/td&gt;` : mergeSupport ? '' : `&lt;td&gt;${name}&lt;/td&gt;`)</td></tr><tr><td class="line-number" value="456"></td><td class="line-content">               + "&lt;td&gt;" + arr + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="457"></td><td class="line-content">               + "&lt;td&gt;" + dep + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="458"></td><td class="line-content">               + (isMerge ? `&lt;td rowspan="${nRows}"&gt;` + mergeTotal.toFixed(2) + '&lt;/td&gt;&lt;td&gt;'</td></tr><tr><td class="line-number" value="459"></td><td class="line-content">                          : mergeSupport ? '&lt;td&gt;'</td></tr><tr><td class="line-number" value="460"></td><td class="line-content">                                         : '&lt;td colspan="2"&gt;')</td></tr><tr><td class="line-number" value="461"></td><td class="line-content">               + (line === '' ? '' : amt.toFixed(2)) + "&lt;/td&gt;";</td></tr><tr><td class="line-number" value="462"></td><td class="line-content">    if (folios === undefined) {</td></tr><tr><td class="line-number" value="463"></td><td class="line-content">        if (ota === 'EXP') result += '&lt;td&gt;&lt;/td&gt;';</td></tr><tr><td class="line-number" value="464"></td><td class="line-content">        result += '&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td colspan="2"&gt;Not in the GC report. Try &lt;a href="' + gcVoucherLink(id, reportType) + `" target="gc-context"&gt;${reportType}-${id}&lt;/a&gt;&lt;/td&gt;`;</td></tr><tr><td class="line-number" value="465"></td><td class="line-content">    } else {</td></tr><tr><td class="line-number" value="466"></td><td class="line-content">        if (ota === 'EXP') {</td></tr><tr><td class="line-number" value="467"></td><td class="line-content">           if (gcAmt === undefined) {</td></tr><tr><td class="line-number" value="468"></td><td class="line-content">               result += '&lt;td&gt;&lt;/td&gt;';</td></tr><tr><td class="line-number" value="469"></td><td class="line-content">           } else if (gcAmt &gt; 0) {</td></tr><tr><td class="line-number" value="470"></td><td class="line-content">               let calcPct = amt*pct/gcAmt;</td></tr><tr><td class="line-number" value="471"></td><td class="line-content">               result += '&lt;td&gt;' + Math.round(calcPct)  + '&lt;/td&gt;';</td></tr><tr><td class="line-number" value="472"></td><td class="line-content">           } else {</td></tr><tr><td class="line-number" value="473"></td><td class="line-content">               result += '&lt;td&gt;∞&lt;/td&gt;';</td></tr><tr><td class="line-number" value="474"></td><td class="line-content">           }</td></tr><tr><td class="line-number" value="475"></td><td class="line-content">        }</td></tr><tr><td class="line-number" value="476"></td><td class="line-content">        result += "&lt;td&gt;" + (gcAmt === undefined ? '' : gcAmt.toFixed(2)) + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="477"></td><td class="line-content">               + '&lt;td&gt;' + comm + '&lt;/td&gt;';</td></tr><tr><td class="line-number" value="478"></td><td class="line-content">        const didStay = statuses.includes("Stayed");</td></tr><tr><td class="line-number" value="479"></td><td class="line-content">        const join_nobr = s =&gt; Array.from(s).sort().map(t=&gt;'&lt;span class="nobr"&gt;'+t+'&lt;/span&gt;').join(', ');</td></tr><tr><td class="line-number" value="480"></td><td class="line-content">        result += "&lt;td&gt;" + (didStay ? join_nobr(gcArr) : '') + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="481"></td><td class="line-content">               + "&lt;td&gt;" + (didStay ? join_nobr(gcDep) : '') + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="482"></td><td class="line-content">               + "&lt;td&gt;" + folios.map(fid =&gt; {return '&lt;a href="https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/Details/' + fid + '" target="gc-context"&gt;' + fid + '&lt;/a&gt;'})</td></tr><tr><td class="line-number" value="483"></td><td class="line-content">                                 .join(',&lt;br&gt;') + (folios.length &gt; 1 ? `&lt;br&gt;(${folios.length} folios)` : '') + "&lt;/td&gt;"</td></tr><tr><td class="line-number" value="484"></td><td class="line-content">               + "&lt;td&gt;" + statuses.join(',&lt;br&gt;') + "&lt;/td&gt;";</td></tr><tr><td class="line-number" value="485"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="486"></td><td class="line-content">    result += '&lt;td&gt;&lt;span&gt;&lt;/span&gt;&lt;button class="note"&gt;Add Note...&lt;/button&gt;&lt;/td&gt;';</td></tr><tr><td class="line-number" value="487"></td><td class="line-content">    result += "&lt;/tr&gt;";</td></tr><tr><td class="line-number" value="488"></td><td class="line-content">    return result;</td></tr><tr><td class="line-number" value="489"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="490"></td><td class="line-content">function tableHeader(ota) {</td></tr><tr><td class="line-number" value="491"></td><td class="line-content">    return "&lt;tr&gt;"</td></tr><tr><td class="line-number" value="492"></td><td class="line-content">         + "&lt;th&gt;line #&lt;/th&gt;"</td></tr><tr><td class="line-number" value="493"></td><td class="line-content">         + `&lt;th&gt;${ota}#&lt;/th&gt;`</td></tr><tr><td class="line-number" value="494"></td><td class="line-content">         + "&lt;th&gt;name&lt;/th&gt;"</td></tr><tr><td class="line-number" value="495"></td><td class="line-content">         + `&lt;th&gt;${ota} arrival&lt;/th&gt;`</td></tr><tr><td class="line-number" value="496"></td><td class="line-content">         + `&lt;th&gt;${ota} departure&lt;/th&gt;`</td></tr><tr><td class="line-number" value="497"></td><td class="line-content">         + `&lt;th colspan="2"&gt;${ota} total&lt;/th&gt;`</td></tr><tr><td class="line-number" value="498"></td><td class="line-content">         + (ota === 'EXP' ? '&lt;th&gt;EXP %&lt;/th&gt;' :'')</td></tr><tr><td class="line-number" value="499"></td><td class="line-content">         + "&lt;th&gt;GC total&lt;/th&gt;"</td></tr><tr><td class="line-number" value="500"></td><td class="line-content">         + "&lt;th&gt;Extra Commission&lt;/th&gt;"</td></tr><tr><td class="line-number" value="501"></td><td class="line-content">         + "&lt;th&gt;GC arrival&lt;/th&gt;"</td></tr><tr><td class="line-number" value="502"></td><td class="line-content">         + "&lt;th&gt;GC departure&lt;/th&gt;"</td></tr><tr><td class="line-number" value="503"></td><td class="line-content">         + "&lt;th&gt;GC folio(s)&lt;/th&gt;"</td></tr><tr><td class="line-number" value="504"></td><td class="line-content">         + "&lt;th&gt;GC status&lt;/th&gt;"</td></tr><tr><td class="line-number" value="505"></td><td class="line-content">         + "&lt;th&gt;Notes&lt;/th&gt;"</td></tr><tr><td class="line-number" value="506"></td><td class="line-content">         + "&lt;/tr&gt;";</td></tr><tr><td class="line-number" value="507"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="508"></td><td class="line-content">document.getElementById('tbl').addEventListener('click', function(e) {</td></tr><tr><td class="line-number" value="509"></td><td class="line-content">    if (e.target.className !== 'note') return;</td></tr><tr><td class="line-number" value="510"></td><td class="line-content">    const btn = e.target;</td></tr><tr><td class="line-number" value="511"></td><td class="line-content">    const span = btn.previousSibling;</td></tr><tr><td class="line-number" value="512"></td><td class="line-content">    const s = prompt('Type note here:', span.innerText);</td></tr><tr><td class="line-number" value="513"></td><td class="line-content">    if (s) {</td></tr><tr><td class="line-number" value="514"></td><td class="line-content">        span.innerText = s;</td></tr><tr><td class="line-number" value="515"></td><td class="line-content">        btn.innerText = 'Edit...';</td></tr><tr><td class="line-number" value="516"></td><td class="line-content">    }</td></tr><tr><td class="line-number" value="517"></td><td class="line-content">});</td></tr><tr><td class="line-number" value="518"></td><td class="line-content">function propertyLink(id, ota, hotel_id) {</td></tr><tr><td class="line-number" value="519"></td><td class="line-content">    if (ota === 'BDC') return 'https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/booking.html?hotel_id=' + hotel_id + '&amp;res_id=' + id;</td></tr><tr><td class="line-number" value="520"></td><td class="line-content">    return 'https://apps.expediapartnercentral.com/lodging/reservations/reservationDetails.html?htid=' + hotel_id + '&amp;reservationIds=' + id;</td></tr><tr><td class="line-number" value="521"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="522"></td><td class="line-content">function gcVoucherLink(id, ota) {</td></tr><tr><td class="line-number" value="523"></td><td class="line-content">    if (ota === 'BDC') return 'https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/FindFolio?KwAny=BDC-' + id + '&amp;KwIsVoucher=1&amp;KwIsAllFolio=AllFolio';</td></tr><tr><td class="line-number" value="524"></td><td class="line-content">    return 'https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/FindFolio?KwAny=EXP*' + id + '&amp;KwIsVoucher=1&amp;KwIsAllFolio=AllFolio';</td></tr><tr><td class="line-number" value="525"></td><td class="line-content">}</td></tr><tr><td class="line-number" value="526"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="527"></td><td class="line-content">// parse code from https://github.com/SebastianSimon/csv-parser (and minified)</td></tr><tr><td class="line-number" value="528"></td><td class="line-content">function parseCSV(g,{quote:h='"',separators:k=[","],forceLineFeedAfterCarriageReturn:t=!0,linefeedBeforeEOF:n=!1,ignoreSpacesAfterQuotedString:u=!0,taintQuoteSeparatorLines:v=!1}={})</td></tr><tr><td class="line-number" value="529"></td><td class="line-content">{const p=(()=&gt;{const a=b=&gt;"string"===typeof b&amp;&amp;1&gt;=b.length;return b=&gt;"string"===typeof b?Array.from(b):Array.isArray(b)?b.filter(a):[]})(),q=a=&gt;""!==a&amp;&amp;"\n"!==a&amp;&amp;"\r"!==a,w=/\r\n|\r/g,x=/\r\n|\n\r|\r/g,y=a=&gt;{if(1===a.length)return a[0];if(a.includes("s")){if(a.includes("q")&amp;&amp;!a.includes("p"))return"q";if(!a.includes("q")&amp;&amp;a.includes("p"))return"p"}if(a.includes("q")&amp;&amp;a.includes("p"))return"r"},</td></tr><tr><td class="line-number" value="530"></td><td class="line-content">z=(()=&gt;{const a={y:{f:"z",o:"x",q:"y",r:"z",p:"z",s:"y"},x:{f:"x",o:"x",q:"w",r:"w",p:"x",s:"x"},v:{f:"z",o:"v",q:"v",r:"z",p:"z",s:"v"},u:{f:"z",o:"v",q:"x",r:"x",p:"z",s:"u"},w:{f:"z",o:"x",q:"x",r:"x",p:"z",s:"y"}};return(b,d)=&gt;{if("e"===b){if("f"===d)return"g";b="u"}return a[b][d]}})(),</td></tr><tr><td class="line-number" value="531"></td><td class="line-content">{A}=(()=&gt;{if(!RegExp.hasOwnProperty("escape")){const b=/[\\^$*+?.()|[\]{}]/g;Object.defineProperty(RegExp,"escape",{configurable:!0,enumerable:!1,writable:!0,value:Object.freeze({escape(d){return String(d).replace(b,"\\$&amp;")}}).escape})}const {a}={a(b){const {q:d,i:m}=this,f=new RegExp(`^ *${RegExp.escape(d)}([\\s\\S]*)${RegExp.escape(d)}( *)$`),c=/^ ([\s\S]*) $/,e=new RegExp(`(${RegExp.escape(d)})\\1`,"g");</td></tr><tr><td class="line-number" value="532"></td><td class="line-content">return" "!==d&amp;&amp;f.test(b)?b.replace(f,"$1"+(m?"":"$2")).replace(e,"$1"):" "===d&amp;&amp;c.test(b)?b.replace(c,"$1").replace(e,"$1"):b}};return{A(b){return b.map(a,this)}}})(),l=(a,b)=&gt;{a=a.array[a.array.length-1];a[a.length-1]+=b},r=(a,b)=&gt;{"r"===b?a.t="a":"p"===b&amp;&amp;(a.t="b")};</td></tr><tr><td class="line-number" value="533"></td><td class="line-content">g=g.replace(t?w:x,"\n");g+=n&amp;&amp;g.endsWith("\n")?"":"\n";g=g.replaceAll("\x00","");h=p(h).filter(q)[0]??"";k=p(k).filter(q);return Array.from(g).reduce((a,b,d,m)=&gt;{var f=a.q,c=a.m;const e=[];"\n"===b?e.push("f"):(b===f&amp;&amp;e.push("q"),c.includes(b)&amp;&amp;e.push("p")," "===b&amp;&amp;e.push("s"));0===e.length&amp;&amp;e.push("o");f=y(e);c=z(a.k,f);if(a.j){if("z"===c&amp;&amp;"f"!==f&amp;&amp;("y"===a.k||"w"===a.k))r(a,f);</td></tr><tr><td class="line-number" value="534"></td><td class="line-content">else if("z"===c||"g"===c)"f"===f?a.t="n":"n"!==a.t&amp;&amp;r(a,f);"f"===f&amp;&amp;"a"===a.t&amp;&amp;("x"===c?(l(a,a.q),c="z",a.t="n"):"w"===c&amp;&amp;(c="g",a.t="n"))}a.k=c;"g"===a.k&amp;&amp;(1&lt;a.array[a.array.length-1].length&amp;&amp;a.array[a.array.length-1].pop(),a.k="z",a.t="n");d!==m.length-1?"z"===a.k?(e.includes("p")?a.array[a.array.length-1].push(""):e.includes("f")&amp;&amp;(a.array.push([""]),a.t="n"),a.k="e"):l(a,b):"x"===a.k&amp;&amp;(a.l&amp;&amp;l(a,b),l(a,a.q));return a},{array:[[""]],k:"e",q:h,m:k,l:n,j:v&amp;&amp;k.includes(h),t:"n"}).array.map(A,{i:u,q:h})}</td></tr><tr><td class="line-number" value="535"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="536"></td><td class="line-content">function binaryInsert(a,b,e){if(0&lt;e(a[0],b))a.splice(0,0,b);else if(0&gt;e(a[a.length-1],b))a.splice(a.length,0,b);else{for(var d=0,c=a.length,g=0,h=c;d&lt;c;){var f=Math.floor((c+d)/2),k=e(a[f],b);0&gt;k?d=f:0&lt;k&amp;&amp;(c=f);if(g===d&amp;&amp;h===c)break;g=d;h=c}a.splice(c,0,b)}};</td></tr><tr><td class="line-number" value="537"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="538"></td><td class="line-content">function storageAvailable(){let e;try{e=window.localStorage;const t="__test__";return e.setItem(t,t),e.removeItem(t),!0}catch(t){return t instanceof DOMException&amp;&amp;"QuotaExceededError"===t.name&amp;&amp;e&amp;&amp;0!==e.length}}</td></tr><tr><td class="line-number" value="539"></td><td class="line-content"><br></td></tr><tr><td class="line-number" value="540"></td><td class="line-content">// version 2.0 by Dominic Yu, 2023-05-08 (version 1.0 can be considered as the various excel scripts we were using)</td></tr><tr><td class="line-number" value="541"></td><td class="line-content">// 2.1, 2023-05-31: add ability to read in Reservation exports as well</td></tr><tr><td class="line-number" value="542"></td><td class="line-content">// 2.1.1, 2023-06-01: fix floating point issue affecting minigroup total comparisons</td></tr><tr><td class="line-number" value="543"></td><td class="line-content">// 2.2, 2023-06-04: handle expedia reconciliation</td></tr><tr><td class="line-number" value="544"></td><td class="line-content"><span class="html-tag">&lt;/script&gt;</span></td></tr><tr><td class="line-number" value="545"></td><td class="line-content"><span class="html-tag">&lt;/body&gt;</span></td></tr><tr><td class="line-number" value="546"></td><td class="line-content"><span class="html-tag">&lt;/html&gt;</span></td></tr><tr><td class="line-number" value="547"></td><td class="line-content"><span class="html-end-of-file"></span></td></tr></tbody></table></body></html>
+table#tbl { width: 100%; }
+table#tbl th:nth-child(8) { overflow-wrap: break-word; max-width: 1px; } /* "Extra Commission" */
+
+tr.merge0 td:nth-child(3) { background-color: #DDDDDD; }
+tr.merge0 td:nth-child(5) { background-color: #DDDDDD; }
+tr.merge0 td:nth-child(7) { background-color: #DDDDDD; }
+tr.merge0 td:nth-child(9) { text-align: right; }
+
+tr.merged { background-color: #DDDDDD; }
+tr.merged td:nth-child(5) { text-align: right; }
+
+table#tbl td:nth-child(6) { text-align: right; } /* right align dollar amounts */
+table#tbl td:nth-child(7) { text-align: right; }
+table#tbl td:nth-child(8) { text-align: right; }
+
+table#tbl td:nth-child(4) { white-space: nowrap; }   /* don't wrap the date fields */
+table#tbl td:nth-child(5) { white-space: nowrap; }
+.nobr { white-space: nowrap; } /* set this style for each individual date in fields with multiple date values */
+table#tbl td:nth-last-child(2) { vertical-align: top; }  /* align multiple values vertically */
+
+span#hotelid_span { display: none; }
+span#expediarate_span { display: none; }
+
+@media print {
+    .note { display: none; }
+    #options { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="options">
+<label for="gc-id">Select your property:</label>
+<select id="gc-id">
+<option value="17">Boston</option>
+<option value="16">Chicago</option>
+<option value="18">Hyannis</option>
+<option value="19">Martha's Vineyard</option>
+<option value="35">New Orleans</option>
+<option value="28">New York City</option>
+<option value="6">Pigeon Point</option>
+<option value="7">Pt. Montara</option>
+<option value="9">Sacramento</option>
+<option value="10">San Diego Downtown</option>
+<option value="3">Santa Monica</option>
+<option value="13" selected>SF Downtown</option>
+<option value="14">SF Fisherman's Wharf</option>
+<option value="22">Truro</option>
+</option>
+</select>
+<p>
+<label for="fileBDC">BDC/EXP file:</label>
+<input type="file" id="fileBDC"> BDC -> Finance -> <a href="https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/finance_reservations.html">Reservation statements</a>, saved in CSV format;
+or EXP -> Payments -> "<a href="https://apps.expediapartnercentral.com/lodging/reservations/reconciliations.html">Review reservations(reconciliations)</a>" -> Export to spreadsheet, then saved as CSV
+<p>
+<label for="fileGC">GC file:</label>
+<input type="file" id="fileGC"> GC Individual Reports -> Management -> OTA Commission; Export to CSV (expand date range for best results)
+<p>
+<span id="hotelid_span">
+<label for="hotelid">Hotel ID:</label>
+<input type="text" id="hotelid"> (required for Expedia links)
+</span>
+<p>
+<span id="expediarate_span">
+<label for="expediarate">Expedia Commission Percentage:</label>
+<input type="text" id="expediarate" size="5"> (default guess is 15%, adjust if your commission is different)
+</span>
+<p>
+<button onclick="createTable()" id="reconcile-button" disabled>Reconcile BDC/EXP</button> <input type="checkbox" id="showall" disabled onclick="createTable()"><label for="showall"">Show all (non-zero commission) rows</label>
+</div>
+
+<p id="error"></p>
+<table id="tbl"></table>
+
+<script>
+"use strict";
+var bdcArray, gcArray, gcPropertyId = 13;
+const fileBDC = document.getElementById('fileBDC');
+const fileGC = document.getElementById('fileGC');
+const selectPropertyId = document.getElementById('gc-id');
+fileBDC.addEventListener('change', function() {
+    const reader = new FileReader();
+    reader.onload = e => {
+        bdcArray = parseCSV(e.target.result);
+        createTable(false);
+    };
+    reader.readAsText(fileBDC.files[0]);
+});
+fileGC.addEventListener('change', function() {
+    const reader = new FileReader();
+    reader.onload = e => {
+        gcArray = parseCSV(e.target.result);
+        createTable(false);
+    };
+    reader.readAsText(fileGC.files[0]);
+});
+const hotelid = document.getElementById('hotelid');
+hotelid.addEventListener('change', function() {
+    createTable(false);
+});
+const expediaIds = {
+    17: 10057467,
+    16:  3964916,
+    18: 10061917,
+    19: 10061920,
+    35: 33886361,
+    28: 10052731,
+     6: 10052690,
+     7: 10060403,
+     9:  6543521,
+    10:  8422472,
+     3: 10060273,
+    13: 38769067,
+    14: 10057249,
+    22: 10061930
+};
+selectPropertyId.addEventListener('change', function() {
+    gcPropertyId = selectPropertyId.value;
+    if (storageAvailable()) {
+        window.localStorage.setItem('reconciliationPropertyId', gcPropertyId);
+    }
+    hotelid.value = expediaIds[gcPropertyId];
+    createTable(false);
+});
+const hotelid_span = document.getElementById('hotelid_span');
+const expediarate = document.getElementById('expediarate');
+expediarate.addEventListener('change', function() {
+    createTable(false);
+});
+const expediarate_span = document.getElementById('expediarate_span');
+
+if (storageAvailable()) {
+    const pId = window.localStorage.getItem('reconciliationPropertyId');
+    if (pId) {
+        selectPropertyId.value = gcPropertyId = pId;
+        hotelid.value = expediaIds[pId];
+    }
+}
+
+let totalComm;
+let reportType;
+function createTable(showErrors = true) {
+    totalComm = 0;
+    reportType = 'BDC';
+    if (bdcArray === undefined) return;
+    let minCols, jAmt;
+    let jArr, jDep, jName, jPct, jPID, jComm;
+    let kPct = 15;
+    if (bdcArray[0][0] === 'Reservation number') {
+        // columns (monthly invoice):
+        // 0: BDC number
+        // 3: arrival date
+        // 4: departure date
+        // 6: guest name
+        // 9: nights
+        // 10: commission percentage
+        // 12: final amount
+        // 13: commission amount (not actually needed for the monthly)
+        // 17: property ID
+        minCols = 19;
+        jAmt = 12;
+    	jName = 6;
+    	jPct = 10;
+    	jComm = 13;
+    	jPID = 17;
+    	jArr = 3;
+    	jDep = 4;
+    } else if (bdcArray[0][0] === 'Book number') {
+        // columns (exported from "Reservations")
+        //  0: BDC-*
+        //  2: name
+        //  3: arrival
+        //  4: departure
+        // 12: price
+        // 13: commission percentage
+        // 14: commission ammount
+        // NO Property ID in this one!
+        minCols = 15;
+        jAmt = 12;
+    	jName = 2;
+    	jPct = 13;
+    	jComm = 14;
+    	jArr = 3;
+    	jDep = 4;
+    } else if (bdcArray[0][0] === 'Reservation ID') {
+    	// Expedia reconciliation format
+    	// 0: res id
+    	// 1: check-in
+    	// 2: check-out
+    	// 3: guest name
+    	// 5: reservation amount, including taxes, which might be wrong
+    	// 6: commission amount
+    	// 7: reconciled amount
+    	reportType = 'EXP';
+        minCols = 7;
+    	jArr = 1;
+    	jDep = 2;
+    	jName = 3;
+    	jComm = 6;
+    	jAmt = 8; // we will calculate this later based on the commission
+        expediarate.value = expediarate.value.replace(/\D/g, ''); // only digits allowed
+        kPct = parseInt(expediarate.value) || 15;
+        if (kPct < 15) kPct = 15;
+        else if (kPct > 40) kPct = 40; // surely commission will never exceed 40%, right?
+        expediarate.value = kPct;
+    } else {
+    	// we don't recognize this format. Skip every row.
+    	minCols = 10000;
+    }
+    hotelid_span.style.display = reportType === 'EXP' ? 'inline' : 'none';
+    expediarate_span.style.display = reportType === 'EXP' ? 'inline' : 'none';
+    hotelid.value = hotelid.value.replace(/\D/g, ''); // only digits allowed in hotel id
+    if (hotelid.value === '') hotelid.value = '38769067';
+
+    if (gcArray === undefined) return;
+    const button = document.getElementById('reconcile-button'); // if both arrays are defined, we can enable the button
+    button.disabled = false;
+    const checkbox = document.getElementById('showall');
+    checkbox.disabled = false;
+    let showAllRows = checkbox.checked;
+    const errorElem = document.getElementById('error');
+    errorElem.innerHTML = '';
+    
+    // collect folio data from the GC export
+    const gcData = {}; // BDC# => array of info
+    //const seenBDC = {};
+    for (const row of gcArray) {
+        if (row.length < 19) continue;
+        // columns:
+        //  0: BDC-*
+        //  3: name
+        //  7: arrival
+        // 11: departure
+        // 12: final amt
+        // 16: folio status
+        // 18: folio ID
+        if (!/^(BDC|EXP)-/.test(row[0])) continue;
+        const m = row[0].match(/\d+/); // extract the first group of digits. Don't rely on this GC column to be well-formed/unedited
+        if (m === null) continue;
+        const id = m[0];
+        if (!/^[0-9]{6,}$/.test(id)) continue; // column 0 should be BDC number, ten+ digits; or EXP number 6+ digits
+        const amt = parseFloat(row[12].replace(/^\$/, '')); // strip dollar sign, then convert to number
+        const folioID = row[18];
+        const status = row[16];
+        if (id in gcData) {
+            // for minigroups, sum up the total, and keep a list of the folio ID's and statuses
+            const h = gcData[id];
+            h[0] += amt;
+            h[1].push(folioID);
+            h[2].push(status);
+            // usually the arrival/departure dates should be the same, but store these as a set just in case
+            h[3].add(row[7]);
+            h[4].add(row[11]);
+        } else {
+            gcData[id] = [amt, [folioID], [status], new Set([row[7]]), new Set([row[11]])];
+        }
+    }
+    if (Object.keys(gcData).length === 0) {
+        if (showErrors) {
+            errorElem.innerHTML = 'No usable data found in the GC file. Make sure you selected the right file ("OTA Commission (HI USA).csv" by default).';
+        }
+        return;
+    }
+
+    // BDC first pass: store all rows where the GC total is less than the BDC total
+    const stayedMaybeMerged = [];
+    const canceledMaybeMerged = {}; // hash of possible merged reservations, identified by (lowercased) BDC guest name
+    const results = [];
+    for (let i = 1, row; row = bdcArray[i]; ++i) {
+        if (row.length < minCols) continue;
+        if (!/^[0-9]{6,}$/.test(row[0])) continue; // column 0 should be BDC number, ten+ digits; or EXP number 6+ digits
+        //seenBDC[row[0]] = true;
+
+        let amt, commission;
+        if (reportType === 'BDC') {
+            amt = parseFloat(row[jAmt]);
+            commission = parseFloat(row[jComm]); // for the Reservations exports, there's no "final amount" field ("amt" is the price field), but the commission amount field will be blank if the guest canceled and the fee was waived
+        } else {
+            const reconciled = parseFloat(row[jComm+1]);
+            if (Number.isNaN(reconciled)) {
+               // for Expedia, calculate the stay amount from the commission
+                commission = parseFloat(row[jComm]);
+                amt = Math.round(commission*10000/kPct)/100;
+            } else {
+                // but if there's already a reconciled amount in the report, use that instead
+                // btw this amount appears to be post-tax for stays, and pre-tax for cancellations
+                // it doesn't matter too much for our purposes
+                // because we'll usually be downloading the report from expedia *before* reconciliation is done
+                amt = reconciled;
+                commission = reconciled*kPct/100;
+            }
+        }
+        if (amt == 0) continue; // skip if BDC doesn't think we owe commission
+        if (!commission) continue;
+        if (row[jName] === '') {
+            row[jName] = row[jName-1]; // if "guest name" is empty, fall back to "booker name"
+        }
+        row[jAmt] = amt;
+        row.push(i+1); // save the line number from BDC file
+
+        const id = row[0];
+        if (id in gcData && !showAllRows) {
+            const gcAmt = parseFloat(gcData[id][0]);
+            if (Math.abs(amt - gcAmt) < 0.42) continue; // skip if guest paid the same (or more, see below) than what BDC statement says
+                // can't use === here because floating point comparisons with minigroup totals could fail
+                // 2024-12-01: but actually just skip small discrepancies because it's not worth the time to save $0.07 on commission
+            if (gcAmt === 0) {
+                // this folio was canceled, so save it in case it was merged
+                const ident = row[jName].toLowerCase();
+                if (ident in canceledMaybeMerged) {
+                    canceledMaybeMerged[ident].push(row);
+                } else {
+                    canceledMaybeMerged[ident] = [row];
+                }
+            } else if (amt < gcAmt) {   // but if it's more, save it in case it was merged with another folio
+                stayedMaybeMerged.push(row);
+                continue;
+            }
+        }
+        results.push(row);
+    }
+    if (results.length === 0) {
+        if (showErrors) {
+            errorElem.innerHTML = 'No results found in the BDC file.';
+        }
+        return;
+    }
+
+    // merged folio handling
+    // Go through list reservations where GC amount is greater than BDC amount. The GC amount might include reservations that were merged.
+    // We look for reservations where the name is the same and the dates stayed overlap with the GC dates stayed.
+    // (I don't consider these critera quite unique enough to guarantee that the result will be 100% accurate, so we output these for human review)
+    const bdcMerges = {}; // BDC id => list of rows
+    const rowsToRemove = new Set();
+    for (const row of stayedMaybeMerged) {
+        const ident = row[jName].toLowerCase();
+        if (!(ident in canceledMaybeMerged)) continue;
+
+        // add row back to results if there are canceled folios with the same name AND overlapping stay date
+        const id = row[0];
+        const arr = Array.from(gcData[id][3]).sort()[0]; // arrival date, according to GC (technically, the earliest arrival date if the BDC id corresponds to a GC minigroup)
+        const dep = Array.from(gcData[id][4]).sort().at(-1); // GC departure date (technically, the latest departure date if there's a minigroup)
+        let showRow = false;
+        for (const r of canceledMaybeMerged[ident]) {
+            if (r[3] < dep && r[4] > arr) {
+                showRow = true;
+                if (id in bdcMerges) {
+                    bdcMerges[id].push(r);
+                } else {
+                    bdcMerges[id] = [r];
+                }
+                rowsToRemove.add(r[0]);
+            }
+        }
+        // insert this extra row in the right place (row number is stored in last item of the "row" array). The "results" array is already ordered by row number
+        if (showRow) binaryInsert(results, row, (a,b) => a[a.length-1] - b[b.length-1]);
+        // for a small number of inserts, probably more efficient to binary insert into the already-sorted array, so I switched to doing that instead of pushing, then sorting
+    }
+
+    // second pass: output table, inserting possible merged folios
+    const today = Date.now();
+    const endOfLastMonth = new Date(); endOfLastMonth.setDate(0);
+    const bdcPropertyId = gcPropertyId == 13 ? 347594 : 270216; // 270216 is NY's BDC id
+    let content = tableHeader(reportType);
+    for (const row of results) {
+        const id = row[0];
+        if (rowsToRemove.has(id)) continue;
+        const name = row[jName];
+        const amt = row[jAmt];
+        let arr = '';
+        let dep = '';
+
+        let gcAmt;
+        let folios;
+        let statuses = [];
+        let gcArr = [];
+        let gcDep = [];
+        if (id in gcData) {
+            gcAmt = gcData[id][0];
+            folios = gcData[id][1];
+            statuses = gcData[id][2];
+            gcArr = gcData[id][3];
+            gcDep = gcData[id][4];
+        } else {
+            // the expedia report includes unreconciled reservations from this month, so skip these
+            if (Date.parse(row[jArr]) > endOfLastMonth) continue;
+            if (Date.parse(row[jDep]) > today) continue;
+        }
+        const isMerge = id in bdcMerges;
+        if (showAllRows || isMerge || !(id in gcData) || statuses.includes("Stayed")) {
+            arr = row[jArr];
+            dep = row[jDep];
+        }
+        let mergeTotal, nRows;
+        if (isMerge) {
+            mergeTotal = bdcMerges[id].reduce((subtotal, row) => subtotal + row[jAmt], amt);
+            nRows = bdcMerges[id].length + 1;
+        }
+        const propertyID = jPID ? row[jPID] : reportType === 'BDC' ? bdcPropertyId : hotelid.value;
+        content += tableRow(reportType, row.at(-1), id, propertyID, name, arr, dep, amt, jPct ? row[jPct] : kPct, gcAmt, gcArr, gcDep, folios, statuses, isMerge, mergeTotal, nRows);
+        if (isMerge) {
+            for (const row of bdcMerges[id].sort((a,b)=>a[jArr].localeCompare(b[jArr]))) {
+                const id = row[0];
+                content += tableRow(reportType, row.at(-1), id, propertyID, '"', row[jArr], row[jDep], row[jAmt], jPct ? row[jPct] : kPct,
+                                    gcData[id][0], gcData[id][3], gcData[id][4], gcData[id][1], gcData[id][2]);
+            }
+        }
+    }
+    content += '<tr><td></td><td></td><td></td><td></td><td></td><td colspan="2"></td><td></td>'
+            + "<td><b>$" + (totalComm/100).toFixed(2) + "</b></td>"
+            + '<td colspan="4">' + (showAllRows ? "total in extra commissions (ignoring merged folios)" : "You could save at least this much in commissions!") + '</td>'
+            + "</tr>";
+
+    // Possible early checkouts: GC folios with no corresponding line in the BDC file
+    // disable this for now, these should show up in the BDC report for the following month
+//     const currentMonth = results[0][4].match(/(-)(\d\d)/)[2];
+//     const hotelId = jPID ? results[0][jPID] : 270216;
+//     for (const [id, row] of Object.entries(gcData)) {
+//         if (seenBDC[id]) continue;
+//         const arrMonth = Array.from(row[3])[0].match(/(-)(\d\d)/)[2];
+//         if (arrMonth !== currentMonth) continue;
+//         const depMonth = Array.from(row[4])[0].match(/(-)(\d\d)/)[2];
+//         if (arrMonth !== depMonth) continue;
+//         content += tableRow(reportType, '', id, hotelId, 'Not in the BDC report.', '', '', '', '',
+//                                 parseFloat(row[0]), row[3], row[4], row[1], row[2]);
+//     }
+
+    document.getElementById("tbl").innerHTML = content;
+}
+function tableRow(ota, line, id, hotel_id, name, arr, dep, amt, pct, gcAmt, gcArr, gcDep, folios, statuses, isMerge, mergeTotal, nRows) {
+    const mergeSupport = name === '"';
+    let comm = '';
+    amt = parseFloat(amt); // among other reasons, the "Reservations" export has this column as "xyz USD"
+    const cmpAmt = isMerge ? mergeTotal : amt;
+    if (gcAmt !== undefined && !mergeSupport && (cmpAmt - gcAmt) > 0.01) {
+        comm = ((cmpAmt - gcAmt)*pct/100);
+        totalComm += Math.round(comm*100); // add up in cents, as integer
+        comm = comm.toFixed(2);
+    }
+    name = name.replace("\n", "<br>");
+    let result = "<tr" + (isMerge? ' class="merge0"' : mergeSupport ? ' class="merged"' : '') + ">"
+               + "<td>" + line + "</td>"
+               + '<td><a href="' + propertyLink(id, reportType, hotel_id) + '" target="bdc-context">'
+                        + id + '</a></td>'
+               + (isMerge ? `<td rowspan="${nRows}">${name}</td>` : mergeSupport ? '' : `<td>${name}</td>`)
+               + "<td>" + arr + "</td>"
+               + "<td>" + dep + "</td>"
+               + (isMerge ? `<td rowspan="${nRows}">` + mergeTotal.toFixed(2) + '</td><td>'
+                          : mergeSupport ? '<td>'
+                                         : '<td colspan="2">')
+               + (line === '' ? '' : amt.toFixed(2)) + "</td>";
+    if (folios === undefined) {
+        if (ota === 'EXP') result += '<td></td>';
+        result += '<td></td><td></td><td></td><td></td><td colspan="2">Not in the GC report. Try <a href="' + gcVoucherLink(id, reportType) + `" target="gc-context">${reportType}-${id}</a></td>`;
+    } else {
+        if (ota === 'EXP') {
+           if (gcAmt === undefined) {
+               result += '<td></td>';
+           } else if (gcAmt > 0) {
+               let calcPct = amt*pct/gcAmt;
+               result += '<td>' + Math.round(calcPct)  + '</td>';
+           } else {
+               result += '<td>∞</td>';
+           }
+        }
+        result += "<td>" + (gcAmt === undefined ? '' : gcAmt.toFixed(2)) + "</td>"
+               + '<td>' + comm + '</td>';
+        const didStay = statuses.includes("Stayed");
+        const join_nobr = s => Array.from(s).sort().map(t=>'<span class="nobr">'+t+'</span>').join(', ');
+        result += "<td>" + (didStay ? join_nobr(gcArr) : '') + "</td>"
+               + "<td>" + (didStay ? join_nobr(gcDep) : '') + "</td>"
+               + "<td>" + folios.map(fid => {return '<a href="https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/Details/' + fid + '" target="gc-context">' + fid + '</a>'})
+                                 .join(',<br>') + (folios.length > 1 ? `<br>(${folios.length} folios)` : '') + "</td>"
+               + "<td>" + statuses.join(',<br>') + "</td>";
+    }
+    result += '<td><span></span><button class="note">Add Note...</button></td>';
+    result += "</tr>";
+    return result;
+}
+function tableHeader(ota) {
+    return "<tr>"
+         + "<th>line #</th>"
+         + `<th>${ota}#</th>`
+         + "<th>name</th>"
+         + `<th>${ota} arrival</th>`
+         + `<th>${ota} departure</th>`
+         + `<th colspan="2">${ota} total</th>`
+         + (ota === 'EXP' ? '<th>EXP %</th>' :'')
+         + "<th>GC total</th>"
+         + "<th>Extra Commission</th>"
+         + "<th>GC arrival</th>"
+         + "<th>GC departure</th>"
+         + "<th>GC folio(s)</th>"
+         + "<th>GC status</th>"
+         + "<th>Notes</th>"
+         + "</tr>";
+}
+document.getElementById('tbl').addEventListener('click', function(e) {
+    if (e.target.className !== 'note') return;
+    const btn = e.target;
+    const span = btn.previousSibling;
+    const s = prompt('Type note here:', span.innerText);
+    if (s) {
+        span.innerText = s;
+        btn.innerText = 'Edit...';
+    }
+});
+function propertyLink(id, ota, hotel_id) {
+    if (ota === 'BDC') return 'https://admin.booking.com/hotel/hoteladmin/extranet_ng/manage/booking.html?hotel_id=' + hotel_id + '&res_id=' + id;
+    return 'https://apps.expediapartnercentral.com/lodging/reservations/reservationDetails.html?htid=' + hotel_id + '&reservationIds=' + id;
+}
+function gcVoucherLink(id, ota) {
+    if (ota === 'BDC') return 'https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/FindFolio?KwAny=BDC-' + id + '&KwIsVoucher=1&KwIsAllFolio=AllFolio';
+    return 'https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/FindFolio?KwAny=EXP*' + id + '&KwIsVoucher=1&KwIsAllFolio=AllFolio';
+}
+
+// parse code from https://github.com/SebastianSimon/csv-parser (and minified)
+function parseCSV(g,{quote:h='"',separators:k=[","],forceLineFeedAfterCarriageReturn:t=!0,linefeedBeforeEOF:n=!1,ignoreSpacesAfterQuotedString:u=!0,taintQuoteSeparatorLines:v=!1}={})
+{const p=(()=>{const a=b=>"string"===typeof b&&1>=b.length;return b=>"string"===typeof b?Array.from(b):Array.isArray(b)?b.filter(a):[]})(),q=a=>""!==a&&"\n"!==a&&"\r"!==a,w=/\r\n|\r/g,x=/\r\n|\n\r|\r/g,y=a=>{if(1===a.length)return a[0];if(a.includes("s")){if(a.includes("q")&&!a.includes("p"))return"q";if(!a.includes("q")&&a.includes("p"))return"p"}if(a.includes("q")&&a.includes("p"))return"r"},
+z=(()=>{const a={y:{f:"z",o:"x",q:"y",r:"z",p:"z",s:"y"},x:{f:"x",o:"x",q:"w",r:"w",p:"x",s:"x"},v:{f:"z",o:"v",q:"v",r:"z",p:"z",s:"v"},u:{f:"z",o:"v",q:"x",r:"x",p:"z",s:"u"},w:{f:"z",o:"x",q:"x",r:"x",p:"z",s:"y"}};return(b,d)=>{if("e"===b){if("f"===d)return"g";b="u"}return a[b][d]}})(),
+{A}=(()=>{if(!RegExp.hasOwnProperty("escape")){const b=/[\\^$*+?.()|[\]{}]/g;Object.defineProperty(RegExp,"escape",{configurable:!0,enumerable:!1,writable:!0,value:Object.freeze({escape(d){return String(d).replace(b,"\\$&")}}).escape})}const {a}={a(b){const {q:d,i:m}=this,f=new RegExp(`^ *${RegExp.escape(d)}([\\s\\S]*)${RegExp.escape(d)}( *)$`),c=/^ ([\s\S]*) $/,e=new RegExp(`(${RegExp.escape(d)})\\1`,"g");
+return" "!==d&&f.test(b)?b.replace(f,"$1"+(m?"":"$2")).replace(e,"$1"):" "===d&&c.test(b)?b.replace(c,"$1").replace(e,"$1"):b}};return{A(b){return b.map(a,this)}}})(),l=(a,b)=>{a=a.array[a.array.length-1];a[a.length-1]+=b},r=(a,b)=>{"r"===b?a.t="a":"p"===b&&(a.t="b")};
+g=g.replace(t?w:x,"\n");g+=n&&g.endsWith("\n")?"":"\n";g=g.replaceAll("\x00","");h=p(h).filter(q)[0]??"";k=p(k).filter(q);return Array.from(g).reduce((a,b,d,m)=>{var f=a.q,c=a.m;const e=[];"\n"===b?e.push("f"):(b===f&&e.push("q"),c.includes(b)&&e.push("p")," "===b&&e.push("s"));0===e.length&&e.push("o");f=y(e);c=z(a.k,f);if(a.j){if("z"===c&&"f"!==f&&("y"===a.k||"w"===a.k))r(a,f);
+else if("z"===c||"g"===c)"f"===f?a.t="n":"n"!==a.t&&r(a,f);"f"===f&&"a"===a.t&&("x"===c?(l(a,a.q),c="z",a.t="n"):"w"===c&&(c="g",a.t="n"))}a.k=c;"g"===a.k&&(1<a.array[a.array.length-1].length&&a.array[a.array.length-1].pop(),a.k="z",a.t="n");d!==m.length-1?"z"===a.k?(e.includes("p")?a.array[a.array.length-1].push(""):e.includes("f")&&(a.array.push([""]),a.t="n"),a.k="e"):l(a,b):"x"===a.k&&(a.l&&l(a,b),l(a,a.q));return a},{array:[[""]],k:"e",q:h,m:k,l:n,j:v&&k.includes(h),t:"n"}).array.map(A,{i:u,q:h})}
+
+function binaryInsert(a,b,e){if(0<e(a[0],b))a.splice(0,0,b);else if(0>e(a[a.length-1],b))a.splice(a.length,0,b);else{for(var d=0,c=a.length,g=0,h=c;d<c;){var f=Math.floor((c+d)/2),k=e(a[f],b);0>k?d=f:0<k&&(c=f);if(g===d&&h===c)break;g=d;h=c}a.splice(c,0,b)}};
+
+function storageAvailable(){let e;try{e=window.localStorage;const t="__test__";return e.setItem(t,t),e.removeItem(t),!0}catch(t){return t instanceof DOMException&&"QuotaExceededError"===t.name&&e&&0!==e.length}}
+
+// version 2.0 by Dominic Yu, 2023-05-08 (version 1.0 can be considered as the various excel scripts we were using)
+// 2.1, 2023-05-31: add ability to read in Reservation exports as well
+// 2.1.1, 2023-06-01: fix floating point issue affecting minigroup total comparisons
+// 2.2, 2023-06-04: handle expedia reconciliation
+</script>
+</body>
+</html>
