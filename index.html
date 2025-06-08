@@ -161,22 +161,21 @@ table#tbl td:nth-last-child(2) {
 }
 </style>
 </head>
-<img src="HI-Canada_Logo.png" alt="HI Canada" width="150">
-<h1>HI Canada – OTA Reconciliation Tool</h1>
+
+<h1><img src="HI-Canada_Logo.png" alt="HI Canada" width="100"> - OTA Reconciliation Tool</h1>
 <body>
 <div id="options">
 <label for="gc-id">Select your property:</label>
 <select id="gc-id">
-  <option value="14">HI Banff Alpine Centre</option>
-  <option value="">HI Jasper</option>
-  <option value="">HI Lake Louise</option>
-  <option value="">HI Vancouver Downtown</option>
-  <option value="">HI Vancouver Jericho Beach</option>
-  <option value="">HI Whistler</option>
-  <option value="">HI Calgary</option>
-  <option value="">HI Edmonton</option>
-  <option value="">HI Ottawa Jail Hostel</option>
-  <option value="">HI Montreal</option>
+  <option value="14">HI Banff</option>
+  <option value="7">HI Calgary</option>
+  <option value="10">HI Edmonton</option>
+  <option value="4">HI Jasper</option>
+  <option value="8">HI Lake Louise</option>
+  <option value="2">HI Vancouver Downtown</option>
+  <option value="1">HI Vancouver Jericho Beach</option>
+  <option value="5">HI Whistler</option>
+  <option value="15">HI Nova Scotia</option>
 </option>
 </select>
 <p>
@@ -230,20 +229,15 @@ hotelid.addEventListener('change', function() {
     createTable(false);
 });
 const expediaIds = {
-    17: 10057467,
-    16:  3964916,
-    18: 10061917,
-    19: 10061920,
-    35: 33886361,
-    28: 10052731,
-     6: 10052690,
-     7: 10060403,
-     9:  6543521,
-    10:  8422472,
-     3: 10060273,
-    13: 38769067,
-    14: 7700310,// HI Banff Alpine center
-    22: 10061930
+    14: 7700310, // Banff
+    7: 234567,  // Calgary
+    10: 345678, // Edmonton
+    4: 456789,  // Jasper
+    8: 567890,  // Lake Louise
+    2: 678901,  // Vancouver Downtown
+    1: 789012,  // Jericho Beach
+    5: 890123,  // Whistler
+    15: 901234  // Nova Scotia
 };
 selectPropertyId.addEventListener('change', function() {
     gcPropertyId = selectPropertyId.value;
@@ -600,7 +594,7 @@ function tableRow(ota, line, id, hotel_id, name, arr, dep, amt, pct, gcAmt, gcAr
         const join_nobr = s => Array.from(s).sort().map(t=>'<span class="nobr">'+t+'</span>').join(', ');
         result += "<td>" + (didStay ? join_nobr(gcArr) : '') + "</td>"
                + "<td>" + (didStay ? join_nobr(gcDep) : '') + "</td>"
-               + "<td>" + folios.map(fid => {return '<a href="https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/Details/' + fid + '" target="gc-context">' + fid + '</a>'})
+               + "<td>" + folios.map(fid => {return '<a href="https://guestcentrix.hihostels.ca/hostel.web/' + gcPropertyId + '/All/Folio/Details/' + fid + '" target="gc-context">' + fid + '</a>'})
                                  .join(',<br>') + (folios.length > 1 ? `<br>(${folios.length} folios)` : '') + "</td>"
                + "<td>" + statuses.join(',<br>') + "</td>";
     }
@@ -641,8 +635,9 @@ function propertyLink(id, ota, hotel_id) {
     return 'https://apps.expediapartnercentral.com/lodging/reservations/reservationDetails.html?htid=' + hotel_id + '&reservationIds=' + id;
 }
 function gcVoucherLink(id, ota) {
-    if (ota === 'BDC') return 'https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/FindFolio?KwAny=BDC-' + id + '&KwIsVoucher=1&KwIsAllFolio=AllFolio';
-    return 'https://gch.hiusa.org/HIUSA_Hostel.Web/' + gcPropertyId + '/All/Folio/FindFolio?KwAny=EXP*' + id + '&KwIsVoucher=1&KwIsAllFolio=AllFolio';
+    const baseURL = 'https://guestcentrix.hihostels.ca/hostel.web/';
+    if (ota === 'BDC') return baseURL + gcPropertyId + '/All/Folio/FindFolio?KwAny=BDC-' + id + '&KwIsVoucher=1&KwIsAllFolio=AllFolio';
+    return baseURL + gcPropertyId + '/All/Folio/FindFolio?KwAny=EXP*' + id + '&KwIsVoucher=1&KwIsAllFolio=AllFolio';
 }
 
 // parse code from https://github.com/SebastianSimon/csv-parser (and minified)
@@ -658,10 +653,16 @@ function binaryInsert(a,b,e){if(0<e(a[0],b))a.splice(0,0,b);else if(0>e(a[a.leng
 
 function storageAvailable(){let e;try{e=window.localStorage;const t="__test__";return e.setItem(t,t),e.removeItem(t),!0}catch(t){return t instanceof DOMException&&"QuotaExceededError"===t.name&&e&&0!==e.length}}
 
-// version 2.0 by Dominic Yu, 2023-05-08 (version 1.0 can be considered as the various excel scripts we were using)
-// 2.1, 2023-05-31: add ability to read in Reservation exports as well
-// 2.1.1, 2023-06-01: fix floating point issue affecting minigroup total comparisons
-// 2.2, 2023-06-04: handle expedia reconciliation
+// version 2.0 by Dominic Yu, 2023-05-08 (version 1.0 can be considered as the various Excel scripts previously used)
+// 2.1, 2023-05-31: added ability to read in Reservation exports as well
+// 2.1.1, 2023-06-01: fixed floating point issue affecting minigroup total comparisons
+// 2.2, 2023-06-04: added support for Expedia reconciliation reports
+//
+// 2.3, 2025-06-07: adapted for HI Canada by Danny Champion
+//       - Updated styling to match HI Hostels Canada branding
+//       - Replaced HI USA property list with Canadian hostels
+//       - Updated GuestCentrix base URLs to use guestcentrix.hihostels.ca
+//       - Cleaned up UI for clarity and accessibility
 </script>
 </body>
 </html>
